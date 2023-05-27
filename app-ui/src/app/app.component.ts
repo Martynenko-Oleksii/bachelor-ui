@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'MediBase';
+  public title: string = 'MediBase';
+
+  constructor(private auth: AuthService) { }
+
+  public ngOnInit(): void {
+    this.auth.checkAuth();
+  }
 }
