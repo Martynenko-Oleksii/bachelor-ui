@@ -21,7 +21,7 @@ export class AuthService {
     this.oidcSecurityService.checkAuth()
       .subscribe(loginResponse => {
         if (loginResponse.isAuthenticated) {
-          this.setUser(loginResponse.userData?.name, loginResponse.accessToken);
+          this.setUser(loginResponse.userData?.name, loginResponse.userData?.role, loginResponse.accessToken);
         } else {
           this.login();
         }
@@ -36,7 +36,7 @@ export class AuthService {
 
   refreshSession() {
     this.oidcSecurityService.forceRefreshSession().subscribe(result => {
-      this.setUser(result.userData?.name, result.accessToken);
+      this.setUser(result.userData?.name, result.userData?.role, result.accessToken);
     }, error => {
       this.login();
     });
@@ -48,11 +48,12 @@ export class AuthService {
     localStorage.removeItem('user');
   }
 
-  private setUser(userName: string, token: string) {
+  private setUser(userName: string, roles: string[], token: string) {
     if (!!userName && !!token) {
       let user = {} as AuthUser;
 
       user.userName = userName;
+      user.roles = roles;
       user.token = token;
 
       this.currentUserSource.next(user);
