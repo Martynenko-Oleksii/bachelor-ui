@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { Template } from '../models/management';
+import { Report, Template } from '../models/management';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -22,5 +22,9 @@ export class ApiService {
 
   public getTemplates(): Observable<Template[]> {
     return this.http.get<Template[]>(`${this.baseApi}Management/TemplateList`, this.httpOptions);
+  }
+
+  public getReports(): Observable<Report[]> {
+    return this.http.get<Report[]>(`${this.baseApi}Management/ReportList`, this.httpOptions);
   }
 }
