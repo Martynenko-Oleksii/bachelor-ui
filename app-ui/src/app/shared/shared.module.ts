@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleMenuComponent } from './components/module-menu/module-menu.component';
+import { AppMaterialModule } from '../app-material.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ModuleMenuComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    AppMaterialModule,
+  ],
+  exports: [
+    ModuleMenuComponent,
   ]
 })
 export class SharedModule { }
