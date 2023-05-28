@@ -7,7 +7,7 @@ import { AppMaterialModule } from '../app-material.module';
 
 @NgModule({
   declarations: [
-    ModuleMenuComponent
+    ModuleMenuComponent,
   ],
   imports: [
     CommonModule,

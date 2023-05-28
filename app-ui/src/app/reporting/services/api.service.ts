@@ -31,4 +31,8 @@ export class ApiService {
   public getCompareGroups(): Observable<CompareGroup[]> {
     return this.http.get<CompareGroup[]>(`${this.baseApi}Management/CompareGroupList`, this.httpOptions);
   }
+
+  public deleteEntity(path: string, id: number): Observable<Object> {
+    return this.http.delete(`${this.baseApi}Management/${path}/${id}`, this.httpOptions);
+  }
 }

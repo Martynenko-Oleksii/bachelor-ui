@@ -32,7 +32,7 @@
                         <div class="action">
                             <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Edit">edit</span>
                         </div>
-                        <div class="action">
+                        <div class="action" (click)="onDelete(report.reportId, report.name)">
                             <span class="material-icons" style="color: #b00020;font-size: 24px;" matTooltip="Delete">delete</span>
                         </div>
                     </div>

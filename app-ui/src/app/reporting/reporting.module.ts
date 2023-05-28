@@ -10,6 +10,7 @@ import { TemplatesComponent } from './components/templates/templates.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { CompareGroupsComponent } from './components/compare-groups/compare-groups.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReportingComponent,
     TemplatesComponent,
     ReportsComponent,
-    CompareGroupsComponent
+    CompareGroupsComponent,
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,

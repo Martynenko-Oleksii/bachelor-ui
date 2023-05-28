@@ -6,6 +6,8 @@ import { takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AuthUser } from 'src/app/shared/models/user';
 import { ReportingRoles } from 'src/app/shared/enums/user-roles';
+import { DeleteDialogComponent, EntityType } from '../delete-dialog/delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-reports',
@@ -20,7 +22,7 @@ export class ReportsComponent extends BaseSubscriber implements OnInit {
   public hasSharingRole: boolean = false;
   public reports: { [key: number]: Report[] } = [];
 
-  constructor(private api: ApiService, private auth: AuthService) {
+  constructor(private api: ApiService, private auth: AuthService, private dialog: MatDialog) {
     super();
   }
 
@@ -30,6 +32,17 @@ export class ReportsComponent extends BaseSubscriber implements OnInit {
       .subscribe((user: AuthUser | null) => this.hasSharingRole = !!user && user.roles.includes(ReportingRoles.ItemSharing));
 
     this.getReports();
+  }
+
+  public onDelete(id: number, name: string): void {
+    this.dialog.open(DeleteDialogComponent, {
+      data: {
+        entityId: id,
+        entityType: EntityType.Report,
+        header: "Delete Report",
+        message: `Would you like to delete report "${name}"?`
+      },
+    });
   }
 
   private getReports(): void {

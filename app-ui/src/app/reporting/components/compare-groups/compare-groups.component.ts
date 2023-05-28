@@ -6,6 +6,8 @@ import { takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AuthUser } from 'src/app/shared/models/user';
 import { ReportingRoles } from 'src/app/shared/enums/user-roles';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent, EntityType } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-compare-groups',
@@ -16,7 +18,7 @@ export class CompareGroupsComponent extends BaseSubscriber implements OnInit {
   public compareGroups: CompareGroup[] = [];
   public hasSharingRole: boolean = false;
 
-  constructor(private api: ApiService, private auth: AuthService) {
+  constructor(private api: ApiService, private auth: AuthService, private dialog: MatDialog) {
     super();
   }
 
@@ -26,6 +28,17 @@ export class CompareGroupsComponent extends BaseSubscriber implements OnInit {
       .subscribe((user: AuthUser | null) => this.hasSharingRole = !!user && user.roles.includes(ReportingRoles.ItemSharing));
 
     this.getCompareGroups();
+  }
+
+  public onDelete(id: number, name: string): void {
+    this.dialog.open(DeleteDialogComponent, {
+      data: {
+        entityId: id,
+        entityType: EntityType.CompareGroup,
+        header: "Delete Compare Group",
+        message: `Would you like to delete compare group "${name}"?`
+      },
+    });
   }
 
   private getCompareGroups(): void {
