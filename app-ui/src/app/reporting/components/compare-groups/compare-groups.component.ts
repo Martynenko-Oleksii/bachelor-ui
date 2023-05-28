@@ -8,6 +8,7 @@ import { AuthUser } from 'src/app/shared/models/user';
 import { ReportingRoles } from 'src/app/shared/enums/user-roles';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent, EntityType } from '../delete-dialog/delete-dialog.component';
+import { CompareGroupCreationComponent } from '../compare-group-creation/compare-group-creation.component';
 
 @Component({
   selector: 'app-compare-groups',
@@ -31,7 +32,7 @@ export class CompareGroupsComponent extends BaseSubscriber implements OnInit {
   }
 
   public onDelete(id: number, name: string): void {
-    this.dialog.open(DeleteDialogComponent, {
+    let dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: {
         entityId: id,
         entityType: EntityType.CompareGroup,
@@ -39,6 +40,12 @@ export class CompareGroupsComponent extends BaseSubscriber implements OnInit {
         message: `Would you like to delete compare group "${name}"?`
       },
     });
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((added: boolean) => { if (added) this.getCompareGroups() });
+  }
+
+  public onCreate(): void {
+    let dialogRef = this.dialog.open(CompareGroupCreationComponent);
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((added: boolean) => { if (added) this.getCompareGroups() });
   }
 
   private getCompareGroups(): void {

@@ -2,6 +2,7 @@
     <mat-card style="height: 100%;">
         <div class="header">
             <span>Compare Groups Manager</span>
+            <button mat-flat-button color="primary" (click)="onCreate()">Create New</button>
         </div>
         <div class="content">
             <div *ngFor="let cg of compareGroups" class="cg-item">

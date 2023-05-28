@@ -35,7 +35,7 @@ export class ReportsComponent extends BaseSubscriber implements OnInit {
   }
 
   public onDelete(id: number, name: string): void {
-    this.dialog.open(DeleteDialogComponent, {
+    let dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: {
         entityId: id,
         entityType: EntityType.Report,
@@ -43,6 +43,7 @@ export class ReportsComponent extends BaseSubscriber implements OnInit {
         message: `Would you like to delete report "${name}"?`
       },
     });
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((added: boolean) => { if (added) this.getReports() });
   }
 
   private getReports(): void {

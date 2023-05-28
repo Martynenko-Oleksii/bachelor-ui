@@ -5,6 +5,8 @@
     & .header {
         font-size: 20px;
         padding: 16px;
+        display: flex;
+        justify-content: space-between;
     }
 
     & .content {

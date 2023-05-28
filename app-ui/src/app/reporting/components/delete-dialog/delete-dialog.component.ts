@@ -46,7 +46,7 @@ export class DeleteDialogComponent {
 
     this.api.deleteEntity(path, this.data.entityId)
       .subscribe(_ => {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       });
   }
 }

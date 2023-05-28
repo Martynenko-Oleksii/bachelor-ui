@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { CompareGroup, Report, Template } from '../models/management';
 import { Observable } from 'rxjs';
+import { Facility } from '../models/facility';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,18 @@ export class ApiService {
 
   public deleteEntity(path: string, id: number): Observable<Object> {
     return this.http.delete(`${this.baseApi}Management/${path}/${id}`, this.httpOptions);
+  }
+
+  public getFacilities(): Observable<Facility[]> {
+    return this.http.get<Facility[]>(`${this.baseApi}Component/FacilitiesByUserId`);
+  }
+
+  public createCompareGroup(name: string, facilities: number[]): Observable<Object> {
+    return this.http.post(`${this.baseApi}Management/CreateCompareGroup`,
+      {
+        name: name,
+        facilities: facilities
+      },
+      this.httpOptions);
   }
 }
