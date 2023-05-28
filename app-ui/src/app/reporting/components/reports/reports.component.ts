@@ -3,6 +3,9 @@ import { Report, reportTypeMapping, reportTypes, statusMapping } from '../../mod
 import { ApiService } from '../../services/api.service';
 import { BaseSubscriber } from 'src/app/shared/models/base-subscriber';
 import { takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthUser } from 'src/app/shared/models/user';
+import { ReportingRoles } from 'src/app/shared/enums/user-roles';
 
 @Component({
   selector: 'app-reports',
@@ -14,13 +17,18 @@ export class ReportsComponent extends BaseSubscriber implements OnInit {
   public reportTypeMapping = reportTypeMapping;
   public statusMapping = statusMapping;
 
+  public hasSharingRole: boolean = false;
   public reports: { [key: number]: Report[] } = [];
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private auth: AuthService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.auth.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user: AuthUser | null) => this.hasSharingRole = !!user && user.roles.includes(ReportingRoles.ItemSharing));
+
     this.getReports();
   }
 
@@ -38,8 +46,6 @@ export class ReportsComponent extends BaseSubscriber implements OnInit {
 
             this.reports[report.reportTypeId].push(report);
           });
-
-          console.log(this.reports);
         }
       })
   }

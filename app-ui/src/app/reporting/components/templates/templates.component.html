@@ -23,6 +23,9 @@
                         <span>{{template.lastModification | date:'medium'}}</span>
                     </div>
                     <div class="actions">
+                        <div class="action" *ngIf="hasSharingRole">
+                            <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Share">share</span>
+                        </div>
                         <div class="action">
                             <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Run Report">play_arrow</span>
                         </div>
