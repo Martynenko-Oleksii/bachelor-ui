@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { Report, Template } from '../models/management';
+import { CompareGroup, Report, Template } from '../models/management';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -26,5 +26,9 @@ export class ApiService {
 
   public getReports(): Observable<Report[]> {
     return this.http.get<Report[]>(`${this.baseApi}Management/ReportList`, this.httpOptions);
+  }
+
+  public getCompareGroups(): Observable<CompareGroup[]> {
+    return this.http.get<CompareGroup[]>(`${this.baseApi}Management/CompareGroupList`, this.httpOptions);
   }
 }
