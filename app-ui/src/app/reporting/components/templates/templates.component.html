@@ -1,0 +1,41 @@
+<div class="container">
+    <mat-card style="height: 100%;">
+        <div class="header">
+            <span>Templates Manager</span>
+        </div>
+        <div class="content">
+            <div *ngFor="let reportType of reportTypes">
+                <mat-expansion-panel class="mat-elevation-z0">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{reportTypeMapping[reportType]}}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <div *ngFor="let template of templates[reportType]" class="template-item">
+                    <div class="title">
+                        <span>{{template.name}}</span>
+                    </div>
+                    <div class="status">
+                        <span>{{statusMapping[template.statusId]}}</span>
+                    </div>
+                    <div class="date">
+                        <span>{{template.lastModification | date:'medium'}}</span>
+                    </div>
+                    <div class="actions">
+                        <div class="action">
+                            <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Run Report">play_arrow</span>
+                        </div>
+                        <div class="action">
+                            <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Edit">edit</span>
+                        </div>
+                        <div class="action">
+                            <span class="material-icons" style="color: #b00020;font-size: 24px;" matTooltip="Delete">delete</span>
+                        </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+            </div>
+        </div>
+    </mat-card>
+</div>

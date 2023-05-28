@@ -6,11 +6,18 @@ import { ReportingComponent } from './reporting.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppMaterialModule } from '../app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TemplatesComponent } from './components/templates/templates.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { CompareGroupsComponent } from './components/compare-groups/compare-groups.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
-    ReportingComponent
+    ReportingComponent,
+    TemplatesComponent,
+    ReportsComponent,
+    CompareGroupsComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ]
 })
 export class ReportingModule { }

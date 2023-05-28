@@ -57,7 +57,6 @@ export class ModuleMenuComponent implements OnInit {
   }
 
   public onSelectItem(url: string): void {
-    console.log(url);
-    this.router.navigate([url]);
+    this.router.navigate([`/reporting/${url}`]);
   }
 }
