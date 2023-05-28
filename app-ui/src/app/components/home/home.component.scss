@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    margin: 18px 16px;
+    height: calc(100% - 36px);
+    width: calc(100vw - 32px);
+
+    & .schedule {
+        width: 336px;
+    }
+
+    & .image {
+        margin: 0 16px;
+        width: 62.5%;
+    }
+}

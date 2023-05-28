@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="left-container">
+        <div class="logo">
+            <span>MediBase</span>
+        </div>
+        <div class="menu">
+            <div class="menu-item" [class.inactive-manu]="inactiveClasses['home']" (click)="onClick('home')">
+                <span>Home</span>
+            </div>
+            <div *ngIf="userRoles.includes(roles.Security)" class="menu-item" [class.inactive-manu]="inactiveClasses['security']" (click)="onClick(roles.Security)">
+                <span>Security</span>
+            </div>
+            <div *ngIf="userRoles.includes(roles.Data)" class="menu-item" [class.inactive-manu]="inactiveClasses['data']" (click)="onClick(roles.Data)">
+                <span>Data</span>
+            </div>
+            <div *ngIf="userRoles.includes(roles.Reporting)" class="menu-item" [class.inactive-manu]="inactiveClasses['reporting']" (click)="onClick(roles.Reporting)">
+                <span>Reporting</span>
+            </div>
+        </div>
+    </div>
+    <div class="profile">
+        <span style="font-size:20px; font-weight: 500;">User Name</span>
+        <i class="material-icons" style="font-size:36px;margin: 14px;color: #29A2E6;">account_circle</i>
+    </div>
+</div>
