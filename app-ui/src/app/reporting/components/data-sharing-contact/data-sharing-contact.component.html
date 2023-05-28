@@ -1,0 +1,48 @@
+<div class="container">
+    <mat-card style="height: 100%;">
+        <div class="card-container">
+            <div>
+                <div class="header">
+                    <span>Reprot Wizard</span>
+                </div>
+                <div class="title">
+                    <span>Data Sharing Contact Report</span>
+                </div>
+            </div>
+            <div class="content">
+                <form [formGroup]="form">
+
+                    <p><b>Step 1:</b> select optional parameters</p>
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Compare Group</mat-label>
+                            <mat-select formControlName="compareGroup">
+                                <mat-option *ngFor="let compareGroup of compareGroups" [value]="compareGroup.compareGroupId">{{compareGroup.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Department</mat-label>
+                            <mat-select formControlName="department">
+                                <mat-option *ngFor="let department of departments" [value]="department.id">{{department.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+            
+                    <p><b>Step 2:</b> complete report creation</p>
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Report Name</mat-label>
+                            <input matInput formControlName="name">
+                        </mat-form-field>
+                    </div>
+
+                </form>
+            </div>
+            <div class="create-button">
+                <button mat-flat-button color="primary" (click)="onCreate()" [disabled]="!form.valid">Create</button>
+            </div>
+        </div>
+    </mat-card>
+</div>

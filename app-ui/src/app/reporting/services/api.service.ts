@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { CompareGroup, Report, Template } from '../models/management';
 import { Observable } from 'rxjs';
 import { Facility } from '../models/facility';
+import { Department } from '../models/deparatment';
+import { DataSharingContactReport } from '../models/reports';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +43,10 @@ export class ApiService {
     return this.http.get<Facility[]>(`${this.baseApi}Component/FacilitiesByUserId`);
   }
 
+  public getDepartments(): Observable<Department[]> {
+    return this.http.get<Department[]>(`${this.baseApi}Component/DepartmentsByUserId`);
+  }
+
   public createCompareGroup(name: string, facilities: number[]): Observable<Object> {
     return this.http.post(`${this.baseApi}Management/CreateCompareGroup`,
       {
@@ -48,5 +54,17 @@ export class ApiService {
         facilities: facilities
       },
       this.httpOptions);
+  }
+
+  public createDataSharingContactReport(data: DataSharingContactReport) {
+    return this.http.post(
+      `${this.baseApi}Administration/CreateDataShareContactReport`,
+      data,
+      {
+        headers: (this.httpOptions as any).headers,
+        observe: 'events',
+        reportProgress: true,
+        responseType: 'blob'
+      });
   }
 }

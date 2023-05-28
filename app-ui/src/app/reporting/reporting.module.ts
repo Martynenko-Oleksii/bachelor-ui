@@ -12,6 +12,7 @@ import { CompareGroupsComponent } from './components/compare-groups/compare-grou
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { CompareGroupCreationComponent } from './components/compare-group-creation/compare-group-creation.component';
+import { DataSharingContactComponent } from './components/data-sharing-contact/data-sharing-contact.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CompareGroupCreationComponent } from './components/compare-group-creati
     ReportsComponent,
     CompareGroupsComponent,
     DeleteDialogComponent,
-    CompareGroupCreationComponent
+    CompareGroupCreationComponent,
+    DataSharingContactComponent
   ],
   imports: [
     CommonModule,

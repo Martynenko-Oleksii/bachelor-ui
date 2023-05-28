@@ -1,0 +1,31 @@
+.container {
+    padding: 0 16px;
+    height: 100%;
+
+    & .card-container {
+        display: flex;
+
+        & .header {
+            font-size: 34px;
+            padding: 32px;
+            padding-bottom: 0;
+        }
+    
+        & .title {
+            font-size: 16px;
+            padding: 32px;
+            padding-top: 8px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        & .content, .create-button {
+            margin: 32px;
+        }
+
+        & .create-button {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+    }
+}
