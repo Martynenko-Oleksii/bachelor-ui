@@ -18,6 +18,7 @@ export interface CompareGroup {
     compareGroupId: number;
     name: string;
     lastModification: Date;
+    facilities: number[];
 }
 
 export const reportTypes = [ 1 ];

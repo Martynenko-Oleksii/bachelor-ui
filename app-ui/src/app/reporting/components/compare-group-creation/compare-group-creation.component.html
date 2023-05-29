@@ -20,7 +20,7 @@
 
         <div mat-dialog-actions>
             <button mat-button mat-dialog-close>Cancel</button>
-            <button mat-button (click)="onCreate()" [disabled]="!form.valid">Create</button>
+            <button mat-button (click)="onCreate()" [disabled]="!form.valid">{{btnText}}</button>
         </div>
     </form>
 </div>

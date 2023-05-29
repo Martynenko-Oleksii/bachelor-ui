@@ -16,7 +16,7 @@
                 <div class="action" *ngIf="hasSharingRole">
                     <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Share">share</span>
                 </div>
-                  <div class="action">
+                  <div class="action" (click)="onEdit(cg)">
                       <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Edit">edit</span>
                   </div>
                   <div class="action" (click)="onDelete(cg.compareGroupId, cg.name)">

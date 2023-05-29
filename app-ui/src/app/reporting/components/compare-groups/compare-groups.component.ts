@@ -44,7 +44,21 @@ export class CompareGroupsComponent extends BaseSubscriber implements OnInit {
   }
 
   public onCreate(): void {
-    let dialogRef = this.dialog.open(CompareGroupCreationComponent);
+    let dialogRef = this.dialog.open(CompareGroupCreationComponent, {
+      data: {
+        compareGroupId: 0,
+        name: '',
+        lastModification: Date.UTC,
+        facilities: []
+      },
+    });
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((added: boolean) => { if (added) this.getCompareGroups() });
+  }
+
+  public onEdit(compareGroup: CompareGroup): void {
+    let dialogRef = this.dialog.open(CompareGroupCreationComponent, {
+      data: compareGroup,
+    });
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((added: boolean) => { if (added) this.getCompareGroups() });
   }
 

@@ -56,6 +56,15 @@ export class ApiService {
       this.httpOptions);
   }
 
+  public editCompareGroup(id: number, name: string, facilities: number[]): Observable<Object> {
+    return this.http.put(`${this.baseApi}Management/EditCompareGroup/${id}`,
+    {
+      name: name,
+      facilities: facilities
+    },
+    this.httpOptions)
+  }
+
   public createDataSharingContactReport(data: DataSharingContactReport) {
     return this.http.post(
       `${this.baseApi}Administration/CreateDataShareContactReport`,
