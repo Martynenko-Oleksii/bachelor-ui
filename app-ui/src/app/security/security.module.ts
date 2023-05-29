@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContractsComponent } from './components/contracts/contracts.component';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { ContractsCreationComponent } from './components/contracts-creation/contracts-creation.component';
+import { CustomersComponent } from './components/customers/customers.component';
+import { CustomersCreationComponent } from './components/customers-creation/customers-creation.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ContractsCreationComponent } from './components/contracts-creation/cont
     SecurityComponent,
     ContractsComponent,
     DeleteDialogComponent,
-    ContractsCreationComponent
+    ContractsCreationComponent,
+    CustomersComponent,
+    CustomersCreationComponent
   ],
   imports: [
     CommonModule,
