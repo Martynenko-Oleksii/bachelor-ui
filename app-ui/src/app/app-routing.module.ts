@@ -7,6 +7,14 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'security',
+        loadChildren: () => import('./security/security.module').then(m => m.SecurityModule),
+      },
+      {
+        path: 'data',
+        loadChildren: () => import('./data/data.module').then(m => m.DataModule),
+      },
+      {
         path: 'reporting',
         loadChildren: () => import('./reporting/reporting.module').then(m => m.ReportingModule),
       }
