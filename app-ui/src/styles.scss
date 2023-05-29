@@ -41,3 +41,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .inactive-manu {
   color: rgba(0, 0, 0, 0.6);
 }
+
+.header-cell {
+  border: 1px solid #FEDFB7 !important;
+  border-top: none !important;
+}
+.cell {
+  border: 1px solid #FEDFB7 !important;
+}
+.first-cell {
+  border-left: none !important;
+}
+.last-cell {
+  border-right: none !important;
+}
+
+.action-button {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #E1F4FC;
+  }
+}

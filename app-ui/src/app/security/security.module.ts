@@ -7,11 +7,17 @@ import { AppMaterialModule } from '../app-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContractsComponent } from './components/contracts/contracts.component';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { ContractsCreationComponent } from './components/contracts-creation/contracts-creation.component';
 
 
 @NgModule({
   declarations: [
-    SecurityComponent
+    SecurityComponent,
+    ContractsComponent,
+    DeleteDialogComponent,
+    ContractsCreationComponent
   ],
   imports: [
     CommonModule,

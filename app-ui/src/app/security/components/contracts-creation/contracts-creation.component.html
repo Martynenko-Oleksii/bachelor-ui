@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Create Contract</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Duration (months)</mat-label>
+                <input type="number" matInput formControlName="duration">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Start (after N days)</mat-label>
+                <input type="number" matInput formControlName="start">
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-button (click)="onSybmit()" [disabled]="!form.valid">Submit</button>
+        </div>
+    </form>
+</div>

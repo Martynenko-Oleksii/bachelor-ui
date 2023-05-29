@@ -1,6 +1,7 @@
 export const environment = {
     production: false,
-    reportingApi: 'https://localhost:7104/api/',
+    securityApi: 'http://localhost:8081/',
+    reportingApi: 'https://localhost:7004/api/',
   
     authority: 'https://localhost:7001',
     redirectUrl: 'http://localhost:4200/home/',
