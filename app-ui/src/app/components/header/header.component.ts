@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { GlobalRoles } from 'src/app/shared/enums/user-roles';
@@ -6,6 +7,7 @@ import { BaseSubscriber } from 'src/app/shared/models/base-subscriber';
 import { AuthUser } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MenuDict, SharedDataService } from 'src/app/shared/services/shared-data.service';
+import { UpdateUserInfoComponent } from '../update-user-info/update-user-info.component';
 
 @Component({
   selector: 'app-header',
@@ -13,12 +15,18 @@ import { MenuDict, SharedDataService } from 'src/app/shared/services/shared-data
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent extends BaseSubscriber implements OnInit {
+  private user: AuthUser | null = null;
+
   public roles: typeof GlobalRoles = GlobalRoles;
   public userRoles: string[] = [];
+  public userName: string = '';
 
   public inactiveClasses: MenuDict = {};
 
-  constructor(private auth: AuthService, private data: SharedDataService, private router: Router) {
+  constructor(private auth: AuthService,
+    private data: SharedDataService,
+    private router: Router,
+    private dialog: MatDialog) {
     super();
   }
 
@@ -29,7 +37,9 @@ export class HeaderComponent extends BaseSubscriber implements OnInit {
       )
       .subscribe((user: AuthUser | null) => {
         if (user) {
+          this.user = user;
           this.userRoles = user.roles;
+          this.userName = user.userName;
         }
       });
 
@@ -59,5 +69,31 @@ export class HeaderComponent extends BaseSubscriber implements OnInit {
         this.router.navigate(['/reporting']);
         break;
     }
+  }
+
+  public onUpdateProfile(): void {
+    this.dialog.open(UpdateUserInfoComponent, {
+      data: {
+        user: this.user,
+        firstSignIn: false,
+        changePassword: false,
+        updateProfile: true
+      }
+    })
+  }
+
+  public onChangePassword(): void {
+    this.dialog.open(UpdateUserInfoComponent, {
+      data: {
+        user: this.user,
+        firstSignIn: false,
+        changePassword: true,
+        updateProfile: false
+      }
+    })
+  }
+
+  public onLogOut(): void {
+    this.auth.logout();
   }
 }

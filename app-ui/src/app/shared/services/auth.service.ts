@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { AuthUser } from '../models/user';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -21,7 +21,8 @@ export class AuthService {
     this.oidcSecurityService.checkAuth()
       .subscribe(loginResponse => {
         if (loginResponse.isAuthenticated) {
-          this.setUser(loginResponse.userData?.name, loginResponse.userData?.role, loginResponse.accessToken);
+          console.log(loginResponse);
+          this.setUser(loginResponse);
         } else {
           this.login();
         }
@@ -30,40 +31,45 @@ export class AuthService {
     this.setCurrentUser();
   }
 
-  login() {
+  public login() {
     this.oidcSecurityService.authorize();
   }
 
-  refreshSession() {
-    this.oidcSecurityService.forceRefreshSession().subscribe(result => {
-      this.setUser(result.userData?.name, result.userData?.role, result.accessToken);
-    }, error => {
-      this.login();
+  public refreshSession() {
+    this.oidcSecurityService.forceRefreshSession().subscribe({
+      next: result => this.setUser(result),
+      error: _ => this.login()
     });
   }
 
-  logout() {
+  public logout() {
     this.oidcSecurityService.logoffAndRevokeTokens().subscribe((result) => console.log(result));
     this.currentUserSource.next(null);
     localStorage.removeItem('user');
   }
 
-  private setUser(userName: string, roles: string[], token: string) {
-    if (!!userName && !!token) {
-      let user = {} as AuthUser;
-
-      user.userName = userName;
-      user.roles = roles;
-      user.token = token;
-
-      this.currentUserSource.next(user);
-
-      this.saveCurrentUser(user);
-    }
+  public saveCurrentUser(user: AuthUser) {
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
-  private saveCurrentUser(user: AuthUser) {
-    localStorage.setItem('user', JSON.stringify(user));
+  private setUser(response: LoginResponse) {
+    let user = {} as AuthUser;
+
+    user.id = response.userData.sub;
+    user.userName = response.userData.name;
+    user.token = response.accessToken;
+    user.roles = response.userData.role;
+    user.customerId = response.userData.customerId;
+    user.customer = response.userData.customer;
+    user.lastSignIn = response.userData.lastSignIn;
+    user.firstSignIn = !response.userData.confirmed;
+    user.email = response.userData.email;
+    user.firstName = response.userData.firstName;
+    user.lastName = response.userData.lastName;
+
+    this.currentUserSource.next(user);
+
+    this.saveCurrentUser(user);
   }
 
   private setCurrentUser() {

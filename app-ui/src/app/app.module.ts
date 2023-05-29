@@ -11,6 +11,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { HomeComponent } from './components/home/home.component';
+import { UpdateUserInfoComponent } from './components/update-user-info/update-user-info.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,16 @@ import { HomeComponent } from './components/home/home.component';
     HeaderComponent,
     FooterComponent,
     ScheduleComponent,
-    HomeComponent
+    HomeComponent,
+    UpdateUserInfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AppMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
     AuthModule.forRoot({
       config: {
         authority: environment.authority,

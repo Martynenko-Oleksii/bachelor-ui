@@ -6,7 +6,7 @@ export const environment = {
     redirectUrl: 'http://localhost:4200/home/',
     postLogoutRedirectUri: 'http://localhost:4200/',
     clientId: 'spa',
-    scope: 'openid profile roles security data reporting offline_access',
+    scope: 'openid profile roles customer additional security data reporting offline_access',
     responseType: 'code'
   };
   

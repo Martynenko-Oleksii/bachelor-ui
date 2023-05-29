@@ -3,6 +3,8 @@ import { AuthService } from './shared/services/auth.service';
 import { BaseSubscriber } from './shared/models/base-subscriber';
 import { AuthUser } from './shared/models/user';
 import { takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateUserInfoComponent } from './components/update-user-info/update-user-info.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ import { takeUntil } from 'rxjs';
 export class AppComponent extends BaseSubscriber implements OnInit {
   public isAuthorized: boolean = false;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private dialog: MatDialog) {
     super();
   }
 
@@ -25,6 +27,17 @@ export class AppComponent extends BaseSubscriber implements OnInit {
       )
       .subscribe((user: AuthUser | null) => {
         this.isAuthorized = !!user;
+
+        if (!!user && user.firstSignIn) {
+          this.dialog.open(UpdateUserInfoComponent, {
+            data: {
+              user: user,
+              firstSignIn: true,
+              changePassword: false,
+              updateProfile: false
+            }
+          })
+        }
       });
   }
 }
