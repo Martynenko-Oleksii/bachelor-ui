@@ -24,15 +24,12 @@ export class SigninLogsComponent extends BaseSubscriber implements OnInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   public customerId: number = 0;
-  public customers: Customer[] = []
 
-  constructor(private api: ApiService, private identity: IdentityService, private auth: AuthService) {
+  constructor(private identity: IdentityService, private auth: AuthService) {
     super();
   }
 
   public ngOnInit(): void {
-    this.getCustomers();
-
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator!;
     this.dataSource.sort = this.sort!;
@@ -45,10 +42,6 @@ export class SigninLogsComponent extends BaseSubscriber implements OnInit {
     });
   }
 
-  public onCustomerChange(): void {
-    this.getUsers(this.customerId);
-  }
-
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource!.filter = filterValue.trim().toLowerCase();
@@ -56,16 +49,6 @@ export class SigninLogsComponent extends BaseSubscriber implements OnInit {
     if (this.dataSource!.paginator) {
       this.dataSource!.paginator.firstPage();
     }
-  }
-
-  private getCustomers(): void {
-    this.api.getCustomers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((customers: Customer[]) => {
-        if (customers) {
-          this.customers = customers;
-        }
-      });
   }
 
   private getUsers(customerId: number): void {

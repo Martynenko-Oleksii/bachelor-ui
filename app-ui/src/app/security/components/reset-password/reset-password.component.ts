@@ -32,23 +32,21 @@ export class ResetPasswordComponent extends BaseSubscriber implements OnInit {
 
   public currentUser: AuthUser | null = null;
 
-  constructor(private api: ApiService, private identity: IdentityService, private fb: FormBuilder, private auth: AuthService) {
+  constructor(private identity: IdentityService, private fb: FormBuilder, private auth: AuthService) {
     super();
   }
 
   public ngOnInit(): void {
-    this.getCustomers();
-
     this.auth.currentUser$.subscribe(user => {
       this.currentUser = user;
-    })
+
+      this.getUsers(user?.customerId!);
+    });
   }
 
   public onCustomerSelected(event: any): void {
     let option = document.getElementById(event.option.id);
     let id = parseInt(option?.attributes.getNamedItem('customer')?.value!);
-
-    this.getUsers(id);
   }
 
   public onUserSelected(event: any): void {
@@ -57,16 +55,6 @@ export class ResetPasswordComponent extends BaseSubscriber implements OnInit {
 
   public onResetPassword(): void {
 
-  }
-
-  private getCustomers(): void {
-    this.api.getCustomers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((customers: Customer[]) => {
-        if (customers) {
-          this.customers = customers;
-        }
-      });
   }
 
   private getUsers(customerId: number): void {
