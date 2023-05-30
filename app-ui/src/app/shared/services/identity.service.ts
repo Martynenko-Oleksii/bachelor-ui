@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
-import { AuthUser, ProfileInfo } from '../models/user';
+import { AuthUser, ProfileInfo, User } from '../models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,23 +21,24 @@ export class IdentityService {
   }
 
   public setInitilUserInfo(info: ProfileInfo): Observable<{ updated: boolean }> {
-    console.log(this.httpOptions);
     return this.http.put<{ updated: boolean }>(`${this.baseApi}/api/Profile/SetInitialUserInfo`,
       info,
       this.httpOptions)
   }
 
   public updateUserInfo(info: ProfileInfo): Observable<{ updated: boolean }> {
-    console.log(this.httpOptions);
     return this.http.put<{ updated: boolean }>(`${this.baseApi}/api/Profile/UpdateProfileInfo`,
       info,
       this.httpOptions)
   }
 
   public changePassword(info: ProfileInfo): Observable<{ updated: boolean }> {
-    console.log(this.httpOptions);
     return this.http.put<{ updated: boolean }>(`${this.baseApi}/api/Profile/UpdateUserPassword`,
       info,
       this.httpOptions)
+  }
+
+  public getUsers(customerId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseApi}/api/Users/GetUsersInfo/${customerId}`, this.httpOptions);
   }
 }

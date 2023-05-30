@@ -5,6 +5,7 @@ import { ContractsComponent } from './components/contracts/contracts.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { FacilitiesComponent } from './components/facilities/facilities.component';
 import { ContractsExpiringComponent } from './components/contracts-expiring/contracts-expiring.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'expiring-contracts', component: ContractsExpiringComponent },
       { path: 'customers', component: CustomersComponent },
       { path: 'facilities', component: FacilitiesComponent },
+      { path: 'reset-passwords', component: ResetPasswordComponent },
     ]
   }
 ];

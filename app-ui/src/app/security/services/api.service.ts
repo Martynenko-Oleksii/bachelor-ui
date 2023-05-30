@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Contract, ExpiringContract } from '../models/contracts';
 import { Customer, Facility, StandardDepartment } from '../models/customer-management';
+import { User } from 'src/app/shared/models/user';
+import { SecurityUser } from '../models/access-control';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +69,9 @@ export class ApiService {
 
   public deleteEntity(endpointPath: string, id: string): Observable<Object> {
     return this.http.delete(`${this.baseApi}${endpointPath}${id}`, this.httpOptions);
+  }
+
+  public getUsers(customerId: number): Observable<SecurityUser[]> {
+    return this.http.get<SecurityUser[]>(`${this.baseApi}users/${customerId}`, this.httpOptions);
   }
 }

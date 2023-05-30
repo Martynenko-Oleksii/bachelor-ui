@@ -15,6 +15,8 @@ import { FacilitiesComponent } from './components/facilities/facilities.componen
 import { FacilityCreationComponent } from './components/facility-creation/facility-creation.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ContractsExpiringComponent } from './components/contracts-expiring/contracts-expiring.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SigninLogsComponent } from './components/signin-logs/signin-logs.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { ContractsExpiringComponent } from './components/contracts-expiring/cont
     CustomersCreationComponent,
     FacilitiesComponent,
     FacilityCreationComponent,
-    ContractsExpiringComponent
+    ContractsExpiringComponent,
+    ResetPasswordComponent,
+    SigninLogsComponent
   ],
   imports: [
     CommonModule,
