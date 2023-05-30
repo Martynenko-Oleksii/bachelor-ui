@@ -7,6 +7,7 @@ export interface User {
     id: string;
     userName: string;
     fullName: string;
+    signInTime: Date;
 }
 
 export interface AuthUser {

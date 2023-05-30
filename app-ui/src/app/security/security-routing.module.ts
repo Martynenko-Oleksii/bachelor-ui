@@ -6,6 +6,7 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { FacilitiesComponent } from './components/facilities/facilities.component';
 import { ContractsExpiringComponent } from './components/contracts-expiring/contracts-expiring.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SigninLogsComponent } from './components/signin-logs/signin-logs.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'customers', component: CustomersComponent },
       { path: 'facilities', component: FacilitiesComponent },
       { path: 'reset-passwords', component: ResetPasswordComponent },
+      { path: 'logs', component: SigninLogsComponent },
     ]
   }
 ];
