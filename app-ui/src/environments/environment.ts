@@ -3,7 +3,7 @@ export const environment = {
     securityApi: 'http://localhost:8081/',
     reportingApi: 'https://localhost:7004/api/',
   
-    authority: 'https://localhost:7001',
+    authority: 'http://localhost:5001',
     redirectUrl: 'http://localhost:4200/home/',
     postLogoutRedirectUri: 'http://localhost:4200/',
     clientId: 'spa',
