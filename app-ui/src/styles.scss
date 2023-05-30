@@ -67,3 +67,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #E1F4FC;
   }
 }
+
+.mat-cell {
+  padding: 16px !important;
+  border-bottom: 1px solid #FEDFB7 !important;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+
+  & .filter {
+    margin: 0 8px;
+  }
+}
+
+.form-field {
+  margin: 0 8px;
+}
