@@ -19,5 +19,6 @@ export interface DepartmentGroup {
     id: number;
     name: string;
     description: string;
+    customerId: number;
     standardDepartments: StandardDepartment[];
 }

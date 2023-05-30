@@ -8,6 +8,7 @@ import { ContractsExpiringComponent } from './components/contracts-expiring/cont
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SigninLogsComponent } from './components/signin-logs/signin-logs.component';
 import { FacilityGroupsComponent } from './components/facility-groups/facility-groups.component';
+import { DepartmentGroupsComponent } from './components/department-groups/department-groups.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     component: SecurityComponent,
     children: [
       { path: 'facility-groups', component: FacilityGroupsComponent },
+      { path: 'department-groups', component: DepartmentGroupsComponent },
       { path: 'contracts', component: ContractsComponent },
       { path: 'expiring-contracts', component: ContractsExpiringComponent },
       { path: 'customers', component: CustomersComponent },
