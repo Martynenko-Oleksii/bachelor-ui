@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Contract, ExpiringContract } from '../models/contracts';
 import { Customer, Facility, StandardDepartment } from '../models/customer-management';
 import { User } from 'src/app/shared/models/user';
-import { SecurityUser } from '../models/access-control';
+import { FacilityGroup, SecurityUser } from '../models/access-control';
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +73,17 @@ export class ApiService {
 
   public getUsers(customerId: number): Observable<SecurityUser[]> {
     return this.http.get<SecurityUser[]>(`${this.baseApi}users/${customerId}`, this.httpOptions);
+  }
+
+  public getFacilityGroups(customerId: number): Observable<FacilityGroup[]> {
+    return this.http.get<FacilityGroup[]>(`${this.baseApi}facilityGroups/${customerId}`, this.httpOptions);
+  }
+
+  public addFacilityGroup(facilityGroup: FacilityGroup): Observable<FacilityGroup> {
+    return this.http.post<FacilityGroup>(`${this.baseApi}facilityGroups`, facilityGroup, this.httpOptions);
+  }
+
+  public editFacilityGroup(facilityGroup: FacilityGroup): Observable<Object> {
+    return this.http.put<Object>(`${this.baseApi}facilityGroups`, facilityGroup, this.httpOptions);
   }
 }

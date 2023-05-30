@@ -7,12 +7,14 @@ import { FacilitiesComponent } from './components/facilities/facilities.componen
 import { ContractsExpiringComponent } from './components/contracts-expiring/contracts-expiring.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SigninLogsComponent } from './components/signin-logs/signin-logs.component';
+import { FacilityGroupsComponent } from './components/facility-groups/facility-groups.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SecurityComponent,
     children: [
+      { path: 'facility-groups', component: FacilityGroupsComponent },
       { path: 'contracts', component: ContractsComponent },
       { path: 'expiring-contracts', component: ContractsExpiringComponent },
       { path: 'customers', component: CustomersComponent },

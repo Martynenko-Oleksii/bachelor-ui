@@ -17,6 +17,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ContractsExpiringComponent } from './components/contracts-expiring/contracts-expiring.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SigninLogsComponent } from './components/signin-logs/signin-logs.component';
+import { FacilityGroupsComponent } from './components/facility-groups/facility-groups.component';
+import { DepartmentGroupsComponent } from './components/department-groups/department-groups.component';
+import { UsersComponent } from './components/users/users.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { UserCreationComponent } from './components/user-creation/user-creation.component';
+import { FacilityGroupCreationComponent } from './components/facility-group-creation/facility-group-creation.component';
+import { DepartmentGroupCreationComponent } from './components/department-group-creation/department-group-creation.component';
 
 
 @NgModule({
@@ -31,7 +38,14 @@ import { SigninLogsComponent } from './components/signin-logs/signin-logs.compon
     FacilityCreationComponent,
     ContractsExpiringComponent,
     ResetPasswordComponent,
-    SigninLogsComponent
+    SigninLogsComponent,
+    FacilityGroupsComponent,
+    DepartmentGroupsComponent,
+    UsersComponent,
+    RolesComponent,
+    UserCreationComponent,
+    FacilityGroupCreationComponent,
+    DepartmentGroupCreationComponent,
   ],
   imports: [
     CommonModule,
