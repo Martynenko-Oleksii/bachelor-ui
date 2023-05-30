@@ -4,6 +4,7 @@ import { SecurityComponent } from './security.component';
 import { ContractsComponent } from './components/contracts/contracts.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { FacilitiesComponent } from './components/facilities/facilities.component';
+import { ContractsExpiringComponent } from './components/contracts-expiring/contracts-expiring.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     component: SecurityComponent,
     children: [
       { path: 'contracts', component: ContractsComponent },
+      { path: 'expiring-contracts', component: ContractsExpiringComponent },
       { path: 'customers', component: CustomersComponent },
       { path: 'facilities', component: FacilitiesComponent },
     ]

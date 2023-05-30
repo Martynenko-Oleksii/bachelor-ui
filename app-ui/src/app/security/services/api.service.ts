@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Contract } from '../models/contracts';
+import { Contract, ExpiringContract } from '../models/contracts';
 import { Customer, Facility, StandardDepartment } from '../models/customer-management';
 
 @Injectable({
@@ -27,6 +27,10 @@ export class ApiService {
 
   public getContracts(): Observable<Contract[]> {
     return this.http.get<Contract[]>(`${this.baseApi}contracts`, this.httpOptions);
+  }
+
+  public getExpiringContracts(): Observable<ExpiringContract[]> {
+    return this.http.get<ExpiringContract[]>(`${this.baseApi}customers/expiring`, this.httpOptions);
   }
 
   public addContract(contract: Contract): Observable<Contract> {

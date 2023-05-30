@@ -14,6 +14,7 @@ import { CustomersCreationComponent } from './components/customers-creation/cust
 import { FacilitiesComponent } from './components/facilities/facilities.component';
 import { FacilityCreationComponent } from './components/facility-creation/facility-creation.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { ContractsExpiringComponent } from './components/contracts-expiring/contracts-expiring.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { BrowserModule } from '@angular/platform-browser';
     CustomersComponent,
     CustomersCreationComponent,
     FacilitiesComponent,
-    FacilityCreationComponent
+    FacilityCreationComponent,
+    ContractsExpiringComponent
   ],
   imports: [
     CommonModule,

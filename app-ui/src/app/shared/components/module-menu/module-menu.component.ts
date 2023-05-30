@@ -22,7 +22,7 @@ const securityMenuSections: { [key: string]: MenuMapping } = {
   'contract-management': {
     name: "Contraact Management",
     items: ["Contracts", "Expiring Contracts"],
-    urls: ["contracts", "exppiring-contracts"]
+    urls: ["contracts", "expiring-contracts"]
   },
   'customer-support': {
     name: "Customer Support",
