@@ -101,7 +101,7 @@ export class CustomersComponent extends BaseSubscriber implements OnInit {
       data: {
         header: "Delete Customer",
         message: `Would you like to delete customer '${customer.name}?'`,
-        endpointPath: "contracts/",
+        endpointPath: "customers/",
         id: customer.id.toString()
       }
     });
