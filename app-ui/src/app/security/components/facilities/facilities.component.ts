@@ -83,9 +83,10 @@ export class FacilitiesComponent extends BaseSubscriber implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       if (!!result && result.added && result.customerId === this.customerId) {
         let data = this.dataSource.data;
-        data.push(result.customer);
+        data.push(result.facility);
         this.dataSource.data = data;
       }
     });
@@ -96,7 +97,7 @@ export class FacilitiesComponent extends BaseSubscriber implements OnInit {
       data: {
         header: "Delete Facility",
         message: `Would you like to delete facility '${facility.name}?'`,
-        endpointPath: "customers/facilities",
+        endpointPath: "customers/facilities/",
         id: facility.id.toString()
       }
     });

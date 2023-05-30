@@ -17,13 +17,13 @@ export class FacilityCreationComponent extends BaseSubscriber implements OnInit 
   public form = this.fb.group({
     name: [this.data.facility.name, [Validators.required, Validators.maxLength(64)]],
     abbreviation: [this.data.facility.abbreviation, [Validators.required, Validators.maxLength(16)]],
-    zipCode: [this.data.facility.zipCode, [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+    zipCode: [this.data.facility.zipCode, [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
     address1: [this.data.facility.address1, [Validators.required, Validators.maxLength(128)]],
     address2: [this.data.facility.address2, [Validators.maxLength(128)]],
     city: [this.data.facility.city, [Validators.required, Validators.maxLength(16)]],
     contactPhone: [this.data.facility.contactPhone, [Validators.required, Validators.maxLength(15)]],
     contactEmail: [this.data.facility.contactEmail, [Validators.required, Validators.maxLength(64), Validators.email]],
-    facilityStandardDepartments: [this.data.facility.facilityStandardDepartments, [Validators.required]],
+    facilityStandardDepartments: [this.data.facility.facilityStandardDepartments.map(x => x.id), [Validators.required]],
   });
   
   public departments: StandardDepartment[] = [];
@@ -56,7 +56,13 @@ export class FacilityCreationComponent extends BaseSubscriber implements OnInit 
       city: this.form.get('city')!.value!,
       contactPhone: this.form.get('contactPhone')!.value!,
       contactEmail: this.form.get('contactEmail')!.value!,
-      facilityStandardDepartments: this.form.get('facilityStandardDepartments')!.value!,
+      facilityStandardDepartments: this.form.get('facilityStandardDepartments')!.value!.map(x => (
+        { 
+          id: x,
+          name: this.departments.find(y => y.id === x)?.name ?? '',
+          description: this.departments.find(y => y.id === x)?.description ?? '',
+        }
+      )),
     }
 
     if (this.data.isAdding) {
