@@ -91,3 +91,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 50%;
   margin: 0 8px !important;
 }
+
+.request-error {
+  background-color: red;
+  color: white;
+
+  & .mat-simple-snackbar-action {
+      color: white;
+  }
+}
+
+.request-successed {
+  background-color: green;
+  color: white;
+
+  & .mat-simple-snackbar-action {
+      color: white;
+  }
+}

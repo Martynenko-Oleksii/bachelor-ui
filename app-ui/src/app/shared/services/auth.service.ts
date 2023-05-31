@@ -21,7 +21,6 @@ export class AuthService {
     this.oidcSecurityService.checkAuth()
       .subscribe(loginResponse => {
         if (loginResponse.isAuthenticated) {
-          console.log(loginResponse);
           this.setUser(loginResponse);
         } else {
           this.login();
