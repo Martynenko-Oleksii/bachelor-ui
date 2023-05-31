@@ -1,7 +1,7 @@
 import { Facility, StandardDepartment } from "./customer-management";
 
 export interface SecurityUser {
-    userId: string;
+    userId: string | null;
     customerId: number;
     facilityGroup: FacilityGroup;
     departmentGroup: DepartmentGroup;

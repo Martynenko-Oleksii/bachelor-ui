@@ -11,8 +11,8 @@ interface MenuMapping {
 const securityMenuSections: { [key: string]: MenuMapping } = {
   'access-control': {
     name: "Access Control",
-    items: ["Users", "Roles", "Facility Groups", "Department Groups"],
-    urls: ["users", "roles", "facility-groups", "department-groups"]
+    items: ["Users", "Facility Groups", "Department Groups"],
+    urls: ["users", "facility-groups", "department-groups"]
   },
   'customer-management': {
     name: "Customer Management",

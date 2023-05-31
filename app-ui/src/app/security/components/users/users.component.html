@@ -1,0 +1,71 @@
+<mat-card style="height: 100%;padding: 16px;">
+    <div class="header">
+        <span>Users</span>
+        <button mat-flat-button color="primary" (click)="onAdd()">Add New</button>
+    </div>
+    <div class="filters">
+        <mat-form-field appearance="fill" class="filter">
+            <mat-label>Facility Group</mat-label>
+            <mat-select [(value)]="facilityGroupId">
+                <mat-option *ngFor="let facilityGroup of facilityGroups" [value]="facilityGroup.id">{{facilityGroup.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="filter">
+            <mat-label>Facility Group</mat-label>
+            <mat-select [(value)]="departmentGroupId">
+                <mat-option *ngFor="let departmentGroup of departmentGroups" [value]="departmentGroup.id">{{departmentGroup.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div style="display: flex;justify-content: flex-end;margin: 0 8px;">
+      <button mat-stroked-button color="primary" (click)="departmentGroupId = 0;facilityGroupId = 0;onApplyFilters();" style="align-self: center;">Reset Filters</button>
+      <button mat-flat-button color="primary" (click)="onApplyFilters()" style="align-self: center;">Apply Filters</button>
+    </div>
+        
+        <div style="margin-top: 16px">
+          <table mat-table [dataSource]="dataSource" matSort>
+        
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell first-cell"> Name </th>
+              <td mat-cell *matCellDef="let row" class="cell first-cell"> {{row.userName}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="fullName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Full Name </th>
+              <td mat-cell *matCellDef="let row" class="cell"> {{row.fullName}}</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Email </th>
+              <td mat-cell *matCellDef="let row" class="cell"> {{row.email}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Delete Action </th>
+              <td mat-cell *matCellDef="let row" class="cell">
+                <div class="action-button" (click)="onDelete(row)" *ngIf="userId !== row.id">
+                  <mat-icon style="color: #b00020">delete</mat-icon> <span>Delete</span>
+                </div>
+              </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell last-cell"> Edit Action </th>
+              <td mat-cell *matCellDef="let row" class="cell last-cell">
+                <div class="action-button" (click)="onEdit(row)" *ngIf="userId !== row.id">
+                  <mat-icon style="color: #29A2E6">edit</mat-icon> <span>Edit</span>
+                </div>
+              </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" [attr.colspan]="displayedColumns.length">No Data</td>
+            </tr>
+          </table>
+        
+          <mat-paginator [pageSize]="6" aria-label="Select page of contracts" hidePageSize></mat-paginator>
+        </div>
+  </mat-card>

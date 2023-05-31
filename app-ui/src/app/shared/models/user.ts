@@ -8,6 +8,7 @@ export interface User {
     userName: string;
     fullName: string;
     signInTime: Date;
+    email: string;
 }
 
 export interface AuthUser {
@@ -30,4 +31,19 @@ export interface ProfileInfo {
     email: string;
     oldPassword: string;
     password: string;
+}
+
+export interface Role {
+    id: string;
+    name: string;
+}
+
+export interface RegisterInfo {
+    customerId: number;
+    customerName: string;
+    userName: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    roles: Role[];
 }

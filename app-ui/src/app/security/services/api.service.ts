@@ -98,4 +98,8 @@ export class ApiService {
   public editDepartmentGroup(departmentGroup: DepartmentGroup): Observable<Object> {
     return this.http.put<Object>(`${this.baseApi}departmentGroups`, departmentGroup, this.httpOptions);
   }
+
+  public addUser(user: SecurityUser): Observable<Object> {
+    return this.http.post<Object>(`${this.baseApi}users`, user, this.httpOptions);
+  }
 }

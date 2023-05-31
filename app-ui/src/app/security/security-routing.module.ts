@@ -9,12 +9,14 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { SigninLogsComponent } from './components/signin-logs/signin-logs.component';
 import { FacilityGroupsComponent } from './components/facility-groups/facility-groups.component';
 import { DepartmentGroupsComponent } from './components/department-groups/department-groups.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SecurityComponent,
     children: [
+      { path: 'users', component: UsersComponent },
       { path: 'facility-groups', component: FacilityGroupsComponent },
       { path: 'department-groups', component: DepartmentGroupsComponent },
       { path: 'contracts', component: ContractsComponent },

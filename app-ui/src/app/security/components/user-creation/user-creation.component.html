@@ -1,0 +1,124 @@
+<h1 mat-dialog-title>Register New User</h1>
+<div mat-dialog-content>
+    <form [formGroup]="addForm" *ngIf="data.isAdding">
+
+        <div>
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>User Name</mat-label>
+                <input matInput formControlName="userName">
+            </mat-form-field>
+        </div>
+
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmPassword">
+                <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
+                    <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+            </mat-form-field>
+        </div>
+
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Facility Group</mat-label>
+                <mat-select formControlName="facilityGroup">
+                    <mat-option *ngFor="let facilityGroup of data.facilityGroups" [value]="facilityGroup.id">{{facilityGroup.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Department Group</mat-label>
+                <mat-select formControlName="departmentGroup">
+                    <mat-option *ngFor="let departmentGroup of data.departmentGroups" [value]="departmentGroup.id">{{departmentGroup.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Global Role</mat-label>
+                <mat-select formControlName="generalRole">
+                    <mat-option *ngFor="let generalRole of generalRoles" [value]="generalRole">{{generalRole}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>App Roles</mat-label>
+                <mat-select formControlName="apps" multiple>
+                    <mat-option *ngFor="let role of allRoles" [value]="role.id">{{role.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-button (click)="onSubmit()" [disabled]="!addForm.valid">Submit</button>
+        </div>
+    </form>
+
+    <form [formGroup]="addForm" *ngIf="!data.isAdding">
+
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+            </mat-form-field>
+        </div>
+
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Facility Group</mat-label>
+                <mat-select formControlName="facilityGroup">
+                    <mat-option *ngFor="let facilityGroup of data.facilityGroups" [value]="facilityGroup.id">{{facilityGroup.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Department Group</mat-label>
+                <mat-select formControlName="departmentGroup">
+                    <mat-option *ngFor="let departmentGroup of data.departmentGroups" [value]="departmentGroup.id">{{departmentGroup.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Global Role</mat-label>
+                <mat-select formControlName="generalRole" [(value)]="selectedGloabalRole">
+                    <mat-option *ngFor="let generalRole of generalRoles" [value]="generalRole">{{generalRole}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>App Roles</mat-label>
+                <mat-select formControlName="apps" [(value)]="selectedAppRoles" multiple>
+                    <mat-option *ngFor="let role of allRoles" [value]="role.id">{{role.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-button (click)="onSubmit()" [disabled]="!editForm.valid">Submit</button>
+        </div>
+    </form>
+</div>

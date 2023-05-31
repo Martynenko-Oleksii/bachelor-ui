@@ -60,7 +60,7 @@ export class AuthService {
     user.token = response.accessToken;
     user.roles = response.userData.role;
     user.customerId = response.userData.customerId;
-    user.customer = response.userData.customer;
+    user.customer = response.userData.customerName;
     user.lastSignIn = response.userData.lastSignIn;
     user.firstSignIn = !response.userData.confirmed;
     user.email = response.userData.email;
