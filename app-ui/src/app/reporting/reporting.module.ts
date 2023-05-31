@@ -9,10 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TemplatesComponent } from './components/templates/templates.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { CompareGroupsComponent } from './components/compare-groups/compare-groups.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { CompareGroupCreationComponent } from './components/compare-group-creation/compare-group-creation.component';
 import { DataSharingContactComponent } from './components/data-sharing-contact/data-sharing-contact.component';
+import { ErrorInterceptor } from '../interceptors/error.interceptor';
 
 
 @NgModule({
@@ -25,6 +26,11 @@ import { DataSharingContactComponent } from './components/data-sharing-contact/d
     CompareGroupCreationComponent,
     DataSharingContactComponent
   ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true
+  }],
   imports: [
     CommonModule,
     ReportingRoutingModule,

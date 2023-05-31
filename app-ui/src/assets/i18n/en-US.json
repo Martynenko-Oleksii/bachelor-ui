@@ -1,0 +1,33 @@
+{
+    "home_page": {
+        "home": "Home",
+        "security": "Security",
+        "data": "Data",
+        "reporting": "Reporting"
+    },
+    "footer": {
+        "contact": "Contact",
+        "terms": "Terms & Conditions"
+    },
+    "schedule": {
+        "header": "Upcoming Periods",
+        "1": "Jabuary 2023 - March 2023",
+        "2": "April 2023 - June 2023",
+        "3": "July 2023 - September 2023",
+        "4": "October 2023 - December 2023",
+        "footer": "* current period"
+    },
+    "update_user_info": {
+        "header1": "Set initial profile info",
+        "header2": "Update profile info",
+        "header3": "Change password",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "email": "Email",
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm Password",
+        "cancel": "Cancel",
+        "submit": "Submit"
+    }
+}

@@ -13,6 +13,14 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
 import { HomeComponent } from './components/home/home.component';
 import { UpdateUserInfoComponent } from './components/update-user-info/update-user-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -42,8 +50,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         useRefreshToken: true,
       }
     }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    }),
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

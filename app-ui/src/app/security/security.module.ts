@@ -22,6 +22,8 @@ import { UsersComponent } from './components/users/users.component';
 import { UserCreationComponent } from './components/user-creation/user-creation.component';
 import { FacilityGroupCreationComponent } from './components/facility-group-creation/facility-group-creation.component';
 import { DepartmentGroupCreationComponent } from './components/department-group-creation/department-group-creation.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from '../interceptors/error.interceptor';
 
 
 @NgModule({
@@ -44,6 +46,11 @@ import { DepartmentGroupCreationComponent } from './components/department-group-
     FacilityGroupCreationComponent,
     DepartmentGroupCreationComponent,
   ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true
+  }],
   imports: [
     CommonModule,
     SecurityRoutingModule,

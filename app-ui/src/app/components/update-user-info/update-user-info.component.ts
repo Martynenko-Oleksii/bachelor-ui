@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthUser, ProfileInfo } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { IdentityService } from 'src/app/shared/services/identity.service';
@@ -49,15 +50,16 @@ export class UpdateUserInfoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: UpdateUserInfo,
     private identity: IdentityService,
     private auth: AuthService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private transalte: TranslateService) { }
 
   public ngOnInit(): void {
       if (this.data.firstSignIn) {
-        this.header = "Set initial profile info";
+        this.header = this.transalte.instant('update_user_info.header1');
       } else if (this.data.updateProfile) {
-        this.header = "Update profile info";
+        this.header = this.transalte.instant('update_user_info.header2');
       } else if (this.data.changePassword) {
-        this.header = "change password";
+        this.header = this.transalte.instant('update_user_info.header3');
       }
   }
 

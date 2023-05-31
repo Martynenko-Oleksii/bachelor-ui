@@ -5,16 +5,16 @@
         </div>
         <div class="menu">
             <div class="menu-item" [class.inactive-manu]="inactiveClasses['home']" (click)="onClick('home')">
-                <span>Home</span>
+                <span>{{ 'home_page.home' | translate }}</span>
             </div>
             <div *ngIf="userRoles.includes(roles.Security)" class="menu-item" [class.inactive-manu]="inactiveClasses['security']" (click)="onClick(roles.Security)">
-                <span>Security</span>
+                <span>{{ 'home_page.security' | translate }}</span>
             </div>
             <div *ngIf="userRoles.includes(roles.Data)" class="menu-item" [class.inactive-manu]="inactiveClasses['data']" (click)="onClick(roles.Data)">
-                <span>Data</span>
+                <span>{{ 'home_page.data' | translate }}</span>
             </div>
             <div *ngIf="userRoles.includes(roles.Reporting)" class="menu-item" [class.inactive-manu]="inactiveClasses['reporting']" (click)="onClick(roles.Reporting)">
-                <span>Reporting</span>
+                <span>{{ 'home_page.reporting' | translate }}</span>
             </div>
         </div>
     </div>

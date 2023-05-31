@@ -1,24 +1,24 @@
 <mat-card>
     <div class="container">
         <div class="header">
-            <span>Upcoming Periods</span>
+            <span>{{ 'schedule.header' | translate }}</span>
         </div>
         <div class="body">
             <div class="period-item" [class.active-period]="false">
-                <span>Jabuary 2023 - March 2023</span>
+                <span>{{ 'schedule.1' | translate }}</span>
             </div>
             <div class="period-item"  [class.active-period]="true">
-                <span>April 2023 - June 2023 </span><span *ngIf="true">*</span>
+                <span>{{ 'schedule.2' | translate }}</span><span *ngIf="true">*</span>
             </div>
             <div class="period-item"  [class.active-period]="false">
-                <span>July 2023 - September 2023</span>
+                <span>{{ 'schedule.3' | translate }}</span>
             </div>
             <div class="period-item"  [class.active-period]="false">
-                <span>October 2023 - December 2023</span>
+                <span>{{ 'schedule.4' | translate }}</span>
             </div>
         </div>
         <div class="footer">
-            <span>* current period</span>
+            <span>{{ 'schedule.footer' | translate }}</span>
         </div>
     </div>
 </mat-card>

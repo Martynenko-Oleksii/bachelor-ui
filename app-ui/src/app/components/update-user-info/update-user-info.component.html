@@ -4,28 +4,28 @@
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>First Name</mat-label>
+                <mat-label>{{ 'update_user_info.first_name' | translate }}</mat-label>
                 <input matInput formControlName="firstName">
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Last Name</mat-label>
+                <mat-label>{{ 'update_user_info.last_name' | translate }}</mat-label>
                 <input matInput formControlName="lastName">
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
+                <mat-label>{{ 'update_user_info.email' | translate }}</mat-label>
                 <input matInput formControlName="email">
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>New Password</mat-label>
+                <mat-label>{{ 'update_user_info.new_password' | translate }}</mat-label>
                 <input matInput [type]="hideNew ? 'password' : 'text'" formControlName="newPassword">
                 <button mat-icon-button matSuffix (click)="hideNew = !hideNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
                     <mat-icon>{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -35,7 +35,7 @@
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Confirm Password</mat-label>
+                <mat-label>{{ 'update_user_info.confirm_password' | translate }}rd</mat-label>
                 <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmPassword">
                 <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
                     <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -44,7 +44,7 @@
         </div>
 
         <div mat-dialog-actions>
-            <button mat-button (click)="onFirstSignIn()" [disabled]="!firstSignInForm.valid" aria-colcount="primary">Submit</button>
+            <button mat-button (click)="onFirstSignIn()" [disabled]="!firstSignInForm.valid" aria-colcount="primary">{{ 'update_user_info.submit' | translate }}</button>
         </div>
     </form>
 
@@ -52,28 +52,28 @@
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>First Name</mat-label>
+                <mat-label>{{ 'update_user_info.first_name' | translate }}</mat-label>
                 <input matInput formControlName="firstName">
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Last Name</mat-label>
+                <mat-label>{{ 'update_user_info.last_name' | translate }}</mat-label>
                 <input matInput formControlName="lastName">
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
+                <mat-label>{{ 'update_user_info.email' | translate }}</mat-label>
                 <input matInput formControlName="email">
             </mat-form-field>
         </div>
 
         <div mat-dialog-actions>
-            <button mat-button mat-dialog-close>Cancel</button>
-            <button mat-button (click)="onUpdateProfile()" [disabled]="!updateProfileForm.valid" aria-colcount="primary">Submit</button>
+            <button mat-button mat-dialog-close>{{ 'update_user_info.cancel' | translate }}</button>
+            <button mat-button (click)="onUpdateProfile()" [disabled]="!updateProfileForm.valid" aria-colcount="primary">{{ 'update_user_info.submit' | translate }}</button>
         </div>
     </form>
 
@@ -81,7 +81,7 @@
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Current Password</mat-label>
+                <mat-label>{{ 'update_user_info.current_password' | translate }}</mat-label>
                 <input matInput [type]="hideCurrent ? 'password' : 'text'" formControlName="currentPassword">
                 <button mat-icon-button matSuffix (click)="hideCurrent = !hideCurrent" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideCurrent">
                     <mat-icon>{{hideCurrent ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -91,7 +91,7 @@
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>New Password</mat-label>
+                <mat-label>{{ 'update_user_info.new_password' | translate }}</mat-label>
                 <input matInput [type]="hideNew ? 'password' : 'text'" formControlName="newPassword">
                 <button mat-icon-button matSuffix (click)="hideNew = !hideNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
                     <mat-icon>{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -101,7 +101,7 @@
 
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Confirm Password</mat-label>
+                <mat-label>{{ 'update_user_info.confirm_password' | translate }}</mat-label>
                 <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmPassword">
                 <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
                     <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -110,8 +110,8 @@
         </div>
 
         <div mat-dialog-actions>
-            <button mat-button mat-dialog-close>Cancel</button>
-            <button mat-button (click)="onChangePassword()" [disabled]="!changePasswordForm.valid" aria-colcount="primary">Submit</button>
+            <button mat-button mat-dialog-close>{{ 'update_user_info.cancel' | translate }}</button>
+            <button mat-button (click)="onChangePassword()" [disabled]="!changePasswordForm.valid" aria-colcount="primary">{{ 'update_user_info.submit' | translate }}</button>
         </div>
     </form>
 </div>
