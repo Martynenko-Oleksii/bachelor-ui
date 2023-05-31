@@ -23,8 +23,8 @@
         <i class="material-icons" style="font-size:36px;margin: 14px;color: #29A2E6;">account_circle</i>
     </div>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="onUpdateProfile()"><mat-icon style="color: #29A2E6">edit</mat-icon>Update Profile</button>
-        <button mat-menu-item (click)="onChangePassword()"><mat-icon style="color: #29A2E6">lock_outline</mat-icon>Change Password</button>
-        <button mat-menu-item (click)="onLogOut()" style="border-top: 1px solid rgba(0, 0, 0, 0.6)"><mat-icon style="color: #b00020">logout</mat-icon>Log Out</button>
+        <button mat-menu-item (click)="onUpdateProfile()"><mat-icon style="color: #29A2E6">edit</mat-icon>{{ 'home_page.update' | translate }}</button>
+        <button mat-menu-item (click)="onChangePassword()"><mat-icon style="color: #29A2E6">lock_outline</mat-icon>{{ 'home_page.change' | translate }}</button>
+        <button mat-menu-item (click)="onLogOut()" style="border-top: 1px solid rgba(0, 0, 0, 0.6)"><mat-icon style="color: #b00020">logout</mat-icon>{{ 'home_page.logout' | translate }}</button>
     </mat-menu>
 </div>

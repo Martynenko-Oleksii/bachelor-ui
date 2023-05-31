@@ -3,7 +3,10 @@
         "home": "Home",
         "security": "Security",
         "data": "Data",
-        "reporting": "Reporting"
+        "reporting": "Reporting",
+        "update": "Update Profile",
+        "change": "Change Password",
+        "logout": "Log Out"
     },
     "footer": {
         "contact": "Contact",
