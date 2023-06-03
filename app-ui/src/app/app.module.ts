@@ -46,8 +46,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         clientId: environment.clientId,
         scope: environment.scope,
         responseType: environment.responseType,
-        silentRenew: true,
-        useRefreshToken: true,
+        silentRenew: environment.silentRenew,
+        useRefreshToken: environment.useRefreshToken,
       }
     }),
     TranslateModule.forRoot({

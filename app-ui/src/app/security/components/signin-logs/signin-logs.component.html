@@ -1,11 +1,11 @@
 <mat-card style="height: 100%;padding: 16px;">
     <div class="header">
-        <span>Logs</span>
+        <span>{{ 'security_logs.header' | translate }}</span>
     </div>
     <div class="filters">
         <mat-form-field class="filter">
-            <mat-label>Search</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Search String" #input>
+            <mat-label>{{ 'security_logs.search' | translate }}</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="{{ 'security_logs.search' | translate }}" #input>
         </mat-form-field>
     </div>
         
@@ -13,25 +13,25 @@
           <table mat-table [dataSource]="dataSource" matSort>
         
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell first-cell"> Name </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell first-cell"> {{ 'security_logs.name' | translate }} </th>
               <td mat-cell *matCellDef="let row" class="cell first-cell"> {{row.userName}} </td>
             </ng-container>
         
             <ng-container matColumnDef="fullName">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Full Name </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> {{ 'security_logs.full_name' | translate }} </th>
               <td mat-cell *matCellDef="let row" class="cell"> {{row.fullName}}</td>
             </ng-container>
         
             <ng-container matColumnDef="signInDate">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Last Log In </th>
-              <td mat-cell *matCellDef="let row" class="cell"> {{row.signInTime | date:'medium'}}</td>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> {{ 'security_logs.last_login' | translate }} </th>
+              <td mat-cell *matCellDef="let row" class="cell"> {{row.signInTime | translateDate:'medium'}}</td>
             </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         
             <tr class="mat-row" *matNoDataRow>
-              <td class="mat-cell" [attr.colspan]="displayedColumns.length">No Data</td>
+              <td class="mat-cell" [attr.colspan]="displayedColumns.length">{{ 'security_logs.no_date' | translate }}</td>
             </tr>
           </table>
         

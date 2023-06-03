@@ -24,6 +24,7 @@ import { FacilityGroupCreationComponent } from './components/facility-group-crea
 import { DepartmentGroupCreationComponent } from './components/department-group-creation/department-group-creation.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from '../interceptors/error.interceptor';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { ErrorInterceptor } from '../interceptors/error.interceptor';
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ]
 })
 export class SecurityModule { }

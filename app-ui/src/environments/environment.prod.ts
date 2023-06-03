@@ -8,6 +8,8 @@ export const environment = {
     postLogoutRedirectUri: 'http://localhost:4200/',
     clientId: 'spa',
     scope: 'openid profile roles customer additional security data reporting offline_access',
-    responseType: 'code'
+    responseType: 'code',
+    silentRenew: true,
+    useRefreshToken: true
   };
   

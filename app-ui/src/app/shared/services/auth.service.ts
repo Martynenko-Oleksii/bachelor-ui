@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { AuthUser } from '../models/user';
-import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {
+  LoginResponse, OidcSecurityService
+} from 'angular-auth-oidc-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSource = new ReplaySubject<AuthUser | null>(1);
+  private currentUserSource =
+    new ReplaySubject<AuthUser | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(
-    private oidcSecurityService: OidcSecurityService,
-    private http: HttpClient,
-    private router: Router) { }
+    private oidcSecurityService: OidcSecurityService) { }
 
   public checkAuth() {
     this.oidcSecurityService.checkAuth()
@@ -35,14 +34,16 @@ export class AuthService {
   }
 
   public refreshSession() {
-    this.oidcSecurityService.forceRefreshSession().subscribe({
-      next: result => this.setUser(result),
-      error: _ => this.login()
-    });
+    this.oidcSecurityService.forceRefreshSession()
+      .subscribe({
+        next: result => this.setUser(result),
+        error: _ => this.login()
+      });
   }
 
   public logout() {
-    this.oidcSecurityService.logoffAndRevokeTokens().subscribe((result) => console.log(result));
+    this.oidcSecurityService.logoffAndRevokeTokens()
+      .subscribe((result) => console.log(result));
     this.currentUserSource.next(null);
     localStorage.removeItem('user');
   }
@@ -53,7 +54,6 @@ export class AuthService {
 
   private setUser(response: LoginResponse) {
     let user = {} as AuthUser;
-
     user.id = response.userData.sub;
     user.userName = response.userData.name;
     user.token = response.accessToken;
@@ -67,7 +67,6 @@ export class AuthService {
     user.lastName = response.userData.lastName;
 
     this.currentUserSource.next(user);
-
     this.saveCurrentUser(user);
   }
 
@@ -81,5 +80,4 @@ export class AuthService {
 
     this.currentUserSource.next(user);
   }
-
 }
