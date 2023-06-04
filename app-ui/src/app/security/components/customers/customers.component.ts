@@ -11,6 +11,7 @@ import { CustomersCreationComponent } from '../customers-creation/customers-crea
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AuthUser } from 'src/app/shared/models/user';
+import { SecurityMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-customers',
@@ -25,11 +26,13 @@ export class CustomersComponent extends BaseSubscriber implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private api: ApiService, private dialog: MatDialog, private auth: AuthService) {
+  constructor(private api: ApiService, private dialog: MatDialog, private auth: AuthService, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateSecurityActiveMenu(SecurityMenuItem.Customers);
+
     this.auth.currentUser$.subscribe((user: AuthUser | null) => {
       if (user) {
         this.customerId = user.customerId;

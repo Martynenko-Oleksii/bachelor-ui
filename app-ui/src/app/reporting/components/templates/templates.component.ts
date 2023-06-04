@@ -8,6 +8,7 @@ import { AuthUser } from 'src/app/shared/models/user';
 import { ReportingRoles } from 'src/app/shared/enums/user-roles';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent, EntityType } from '../delete-dialog/delete-dialog.component';
+import { ReportingMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-templates',
@@ -22,11 +23,12 @@ export class TemplatesComponent extends BaseSubscriber implements OnInit {
   public hasSharingRole: boolean = false;
   public templates: { [key: number]: Template[] } = [];
 
-  constructor(private api: ApiService, private auth: AuthService, private dialog: MatDialog) {
+  constructor(private api: ApiService, private auth: AuthService, private dialog: MatDialog, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateReportingActiveMenu(ReportingMenuItem.Templates);
     this.auth.currentUser$
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: AuthUser | null) => this.hasSharingRole = !!user && user.roles.includes(ReportingRoles.ItemSharing));

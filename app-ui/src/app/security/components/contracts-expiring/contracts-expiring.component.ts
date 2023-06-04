@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from '../../services/api.service';
 import { takeUntil } from 'rxjs';
+import { SecurityMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-contracts-expiring',
@@ -20,11 +21,13 @@ export class ContractsExpiringComponent extends BaseSubscriber implements OnInit
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateSecurityActiveMenu(SecurityMenuItem.ExpiringContracts);
+
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator!;
     this.dataSource.sort = this.sort!;

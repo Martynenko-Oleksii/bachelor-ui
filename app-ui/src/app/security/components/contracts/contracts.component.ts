@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ContractsCreationComponent } from '../contracts-creation/contracts-creation.component';
+import { SecurityMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-contracts',
@@ -22,11 +23,13 @@ export class ContractsComponent extends BaseSubscriber implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private api: ApiService, private dialog: MatDialog) {
+  constructor(private api: ApiService, private dialog: MatDialog, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateSecurityActiveMenu(SecurityMenuItem.Contracts);
+
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator!;
     this.dataSource.sort = this.sort!;

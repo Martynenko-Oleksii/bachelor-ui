@@ -1,6 +1,10 @@
 .container {
     width: 100%;
 
+    & .header-text {
+        color: black;
+    }
+
     & .menu-item {
         font-size: 14px;
         font-weight: 500;

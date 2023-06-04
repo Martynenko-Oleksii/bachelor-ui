@@ -9,6 +9,7 @@ import { ReportingRoles } from 'src/app/shared/enums/user-roles';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent, EntityType } from '../delete-dialog/delete-dialog.component';
 import { CompareGroupCreationComponent } from '../compare-group-creation/compare-group-creation.component';
+import { ReportingMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-compare-groups',
@@ -19,11 +20,13 @@ export class CompareGroupsComponent extends BaseSubscriber implements OnInit {
   public compareGroups: CompareGroup[] = [];
   public hasSharingRole: boolean = false;
 
-  constructor(private api: ApiService, private auth: AuthService, private dialog: MatDialog) {
+  constructor(private api: ApiService, private auth: AuthService, private dialog: MatDialog, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateReportingActiveMenu(ReportingMenuItem.CompareGroups);
+
     this.auth.currentUser$
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: AuthUser | null) => this.hasSharingRole = !!user && user.roles.includes(ReportingRoles.ItemSharing));

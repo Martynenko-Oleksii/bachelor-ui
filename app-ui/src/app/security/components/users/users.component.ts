@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs';
 import { UserCreationComponent } from '../user-creation/user-creation.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { SecurityMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-users',
@@ -40,11 +41,14 @@ export class UsersComponent extends BaseSubscriber implements OnInit {
   constructor(private api: ApiService,
     private identity: IdentityService,
     private auth: AuthService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateSecurityActiveMenu(SecurityMenuItem.Users);
+
     this.auth.currentUser$.subscribe((user: AuthUser | null) => {
       if (user) {
         this.userId = user.id;

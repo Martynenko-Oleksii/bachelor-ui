@@ -7,7 +7,7 @@ import { CompareGroupsComponent } from './components/compare-groups/compare-grou
 import { DataSharingContactComponent } from './components/data-sharing-contact/data-sharing-contact.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'reports', pathMatch: 'full' },
+  //{ path: '', redirectTo: 'reports', pathMatch: 'full' },
   {
     path: '',
     component: ReportingComponent,

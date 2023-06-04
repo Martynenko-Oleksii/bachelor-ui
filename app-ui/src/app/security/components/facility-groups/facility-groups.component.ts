@@ -11,6 +11,7 @@ import { AuthUser } from 'src/app/shared/models/user';
 import { takeUntil } from 'rxjs';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { FacilityGroupCreationComponent } from '../facility-group-creation/facility-group-creation.component';
+import { SecurityMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-facility-groups',
@@ -26,11 +27,13 @@ export class FacilityGroupsComponent extends BaseSubscriber implements OnInit {
 
   public customerId: number = 0;
 
-  constructor(private api: ApiService, private dialog: MatDialog, private auth: AuthService) {
+  constructor(private api: ApiService, private dialog: MatDialog, private auth: AuthService, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateSecurityActiveMenu(SecurityMenuItem.FacilityGroups);
+
     this.auth.currentUser$.subscribe((user: AuthUser | null) => {
       if (user) {
         this.customerId = user.customerId;

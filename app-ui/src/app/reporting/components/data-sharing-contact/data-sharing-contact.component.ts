@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { DataSharingContactReport } from '../../models/reports';
+import { ReportingMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-data-sharing-contact',
@@ -23,11 +24,13 @@ export class DataSharingContactComponent extends BaseSubscriber implements OnIni
   public compareGroups: CompareGroup[] = [];
   public departments: Department[] = []
   
-  constructor(private api: ApiService, private fb: FormBuilder) {
+  constructor(private api: ApiService, private fb: FormBuilder, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateReportingActiveMenu(ReportingMenuItem.DataSharingReport);
+    
     this.getCompareGroups();
     this.getDepartments();
   }

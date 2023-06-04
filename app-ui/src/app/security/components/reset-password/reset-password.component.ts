@@ -9,6 +9,7 @@ import { Validators } from '@angular/forms';
 import { IdentityService } from 'src/app/shared/services/identity.service';
 import { SecurityUser } from '../../models/access-control';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SecurityMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -32,11 +33,13 @@ export class ResetPasswordComponent extends BaseSubscriber implements OnInit {
 
   public currentUser: AuthUser | null = null;
 
-  constructor(private identity: IdentityService, private fb: FormBuilder, private auth: AuthService) {
+  constructor(private identity: IdentityService, private fb: FormBuilder, private auth: AuthService, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateSecurityActiveMenu(SecurityMenuItem.ResetPasswords);
+
     this.auth.currentUser$.subscribe(user => {
       this.currentUser = user;
 

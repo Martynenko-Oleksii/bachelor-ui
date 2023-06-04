@@ -2,12 +2,15 @@
     <div  *ngFor="let role of userRoles">
         <mat-expansion-panel *ngIf="mapping[role]" class="menu-section mat-elevation-z0">
           <mat-expansion-panel-header>
-            <mat-panel-title>
+            <mat-panel-title [class.inactive-manu]="getFlag(role)" class="header-text">
               {{mapping[role].name}}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <div *ngFor="let item of mapping[role].items;index as i " class="menu-item" (click)="onSelectItem(mapping[role].urls[i])">
+          <div *ngFor="let item of mapping[role].items;index as i"
+            [class.inactive-manu]="menuDict[mapping[role].urls[i]] == undefined || menuDict[mapping[role].urls[i]]"
+            class="menu-item"
+            (click)="onSelectItem(mapping[role].urls[i])">
             <span>{{item}}</span>
           </div>
 

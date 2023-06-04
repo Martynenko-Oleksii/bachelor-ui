@@ -10,6 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SecurityMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
 
 @Component({
   selector: 'app-signin-logs',
@@ -25,11 +26,13 @@ export class SigninLogsComponent extends BaseSubscriber implements OnInit {
 
   public customerId: number = 0;
 
-  constructor(private identity: IdentityService, private auth: AuthService) {
+  constructor(private identity: IdentityService, private auth: AuthService, private shared: SharedDataService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.shared.updateSecurityActiveMenu(SecurityMenuItem.Logs);
+
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator!;
     this.dataSource.sort = this.sort!;
