@@ -40,11 +40,11 @@ export class ApiService {
   }
 
   public getFacilities(): Observable<Facility[]> {
-    return this.http.get<Facility[]>(`${this.baseApi}Component/FacilitiesByUserId`);
+    return this.http.get<Facility[]>(`${this.baseApi}Component/FacilitiesByUserId`, this.httpOptions);
   }
 
   public getDepartments(): Observable<Department[]> {
-    return this.http.get<Department[]>(`${this.baseApi}Component/DepartmentsByUserId`);
+    return this.http.get<Department[]>(`${this.baseApi}Component/StandartDepartmentsByUserId`, this.httpOptions);
   }
 
   public createCompareGroup(name: string, facilities: number[]): Observable<Object> {
