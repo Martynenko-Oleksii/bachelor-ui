@@ -22,7 +22,7 @@
         
             <ng-container matColumnDef="expiring">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Expiring Date </th>
-              <td mat-cell *matCellDef="let row" class="cell"> {{row.expiringDate | date:'medium'}}</td>
+              <td mat-cell *matCellDef="let row" class="cell"> {{row.expiringDate | translateDate:'medium'}}</td>
             </ng-container>
         
             <ng-container matColumnDef="renewal">

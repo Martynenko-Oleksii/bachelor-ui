@@ -14,6 +14,7 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
 import { CompareGroupCreationComponent } from './components/compare-group-creation/compare-group-creation.component';
 import { DataSharingContactComponent } from './components/data-sharing-contact/data-sharing-contact.component';
 import { ErrorInterceptor } from '../interceptors/error.interceptor';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ErrorInterceptor } from '../interceptors/error.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    TranslateModule,
   ]
 })
 export class ReportingModule { }

@@ -10,7 +10,7 @@
                   <span>{{cg.name}}</span>
               </div>
               <div class="date">
-                  <span>{{cg.lastModification | date:'medium'}}</span>
+                  <span>{{cg.lastModification | translateDate:'medium'}}</span>
               </div>
               <div class="actions">
                 <div class="action" *ngIf="hasSharingRole">

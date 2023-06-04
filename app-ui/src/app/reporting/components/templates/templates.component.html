@@ -20,7 +20,7 @@
                         <span>{{statusMapping[template.statusId]}}</span>
                     </div>
                     <div class="date">
-                        <span>{{template.lastModification | date:'medium'}}</span>
+                        <span>{{template.lastModification | translateDate:'medium'}}</span>
                     </div>
                     <div class="actions">
                         <div class="action" *ngIf="hasSharingRole">
