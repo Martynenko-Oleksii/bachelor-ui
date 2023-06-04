@@ -113,8 +113,6 @@ export class ModuleMenuComponent implements OnInit {
     });
 
     this.shared.reportingMenuData$.subscribe(res => {
-      console.log(res);
-      console.log(!this.moduleSelected);
       if (res && !this.moduleSelected) {
         this.menuDict = res;
         this.moduleSelected = true;

@@ -5,6 +5,7 @@ import { SharedDataService } from '../shared/services/shared-data.service';
 import { AuthService } from '../shared/services/auth.service';
 import { takeUntil } from 'rxjs';
 import { AuthUser } from '../shared/models/user';
+import { DetailsData } from '../shared/components/details-panel/details-panel.component';
 
 @Component({
   selector: 'app-security',
@@ -17,6 +18,7 @@ export class SecurityComponent extends BaseSubscriber implements OnInit {
   public globalRoles: typeof GlobalRoles = GlobalRoles;
 
   public userRoles: string[] = [];
+  public detailsData: DetailsData[] = [];
 
   constructor(private data: SharedDataService, private auth: AuthService) {
     super();
@@ -32,6 +34,10 @@ export class SecurityComponent extends BaseSubscriber implements OnInit {
       .subscribe((user: AuthUser | null) => {
         if (user) {
           this.userRoles = user.roles;
+          this.detailsData.push({
+            title: 'Customer',
+            values: [`${user.customerId}. ${user.customer}`],
+          });
         }
       });
   }

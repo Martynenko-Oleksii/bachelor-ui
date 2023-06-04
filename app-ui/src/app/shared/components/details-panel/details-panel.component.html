@@ -1,0 +1,6 @@
+<mat-card *ngIf="data" class="container" style="height: 100%;">
+    <div *ngFor="let detailsItem of data" class="details-item">
+        <span class="title">{{detailsItem.title}}:</span>
+        <span *ngFor="let itemValue of detailsItem.values" class="value">{{itemValue}}</span>
+    </div>
+</mat-card>
