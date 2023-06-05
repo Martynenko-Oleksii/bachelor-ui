@@ -15,6 +15,7 @@ import { CompareGroupCreationComponent } from './components/compare-group-creati
 import { DataSharingContactComponent } from './components/data-sharing-contact/data-sharing-contact.component';
 import { ErrorInterceptor } from '../interceptors/error.interceptor';
 import { TranslateModule } from '@ngx-translate/core';
+import { CompareGroupTrendComponent } from './components/compare-group-trend/compare-group-trend.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CompareGroupsComponent,
     DeleteDialogComponent,
     CompareGroupCreationComponent,
-    DataSharingContactComponent
+    DataSharingContactComponent,
+    CompareGroupTrendComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

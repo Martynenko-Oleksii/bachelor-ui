@@ -5,8 +5,8 @@ import { environment } from 'src/environments/environment';
 import { CompareGroup, Report, Template } from '../models/management';
 import { Observable } from 'rxjs';
 import { Facility } from '../models/facility';
-import { Department } from '../models/deparatment';
-import { DataSharingContactReport } from '../models/reports';
+import { Department, Measure, TimePeriod } from '../models/parameters';
+import { CompareGroupTrendReport, DataSharingContactReport } from '../models/reports';
 
 @Injectable({
   providedIn: 'root'
@@ -75,5 +75,33 @@ export class ApiService {
         reportProgress: true,
         responseType: 'blob'
       });
+  }
+
+  public createCompareGroupTrendTemplate(data: CompareGroupTrendReport) {
+    return this.http.post(`${this.baseApi}GenericReports/CreateCompareGroupTrendReport`, data, this.httpOptions);
+  }
+
+  public createCompareGroupTrendReport(data: CompareGroupTrendReport) {
+    return this.http.post(
+      `${this.baseApi}GenericReports/CreateCompareGroupTrendReport`,
+      data,
+      {
+        headers: (this.httpOptions as any).headers,
+        observe: 'events',
+        reportProgress: true,
+        responseType: 'blob'
+      });
+  }
+
+  public getTimePeriods(periodType: string): Observable<TimePeriod[]> {
+    return this.http.get<TimePeriod[]>(`${this.baseApi}Component/TimePeriodsList/${periodType}`, this.httpOptions);
+  }
+
+  public getDepartmentByStandardDepartmentId(id: number): Observable<Department[]> {
+    return this.http.get<Department[]>(`${this.baseApi}Component/DepartmentByStandartDep/${id}`, this.httpOptions);
+  }
+
+  public getMeasuresByDepartmentId(id: number): Observable<Measure[]> {
+    return this.http.get<Measure[]>(`${this.baseApi}Component/MeasuresByDeptId/${id}`, this.httpOptions);
   }
 }

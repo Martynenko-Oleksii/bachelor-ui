@@ -1,0 +1,178 @@
+<div class="container">
+    <mat-card style="height: 100%;">
+        <div class="card-container">
+            <div class="header-container">
+                <div class="header">
+                    <span>Report Wizard</span>
+                </div>
+                <div class="title">
+                    <span>Compare Group Trend Report</span>
+                </div>
+            </div>
+            <div class="content">
+                <form [formGroup]="form">
+                    <mat-accordion>
+                        <mat-expansion-panel class="mat-elevation-z0" [expanded]="step === 1" (opened)="setStep(1)">
+                            <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span><b>Step 1</b></span>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <span>Select general parameters</span>
+                            </mat-panel-description>
+                            </mat-expansion-panel-header>
+    
+                            <div>
+                                <span style="color: rgba(0, 0, 0, 0.37);">Period Type</span>
+                            </div>
+                            <div class="form-field-row">
+                                <mat-radio-group class="form-field" formControlName="periodType" color="primary" (change)="onPeriodTypeChange($event.value)">
+                                    <mat-radio-button value="Q">Quarter period</mat-radio-button>
+                                    <mat-radio-button value="Y">Year period</mat-radio-button>
+                                </mat-radio-group>
+    
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Standard Department</mat-label>
+                                    <mat-select formControlName="standardDepartment" (selectionChange)="onSelectStandardDepartment($event.value)">
+                                        <mat-option *ngFor="let standardDepartment of standardDepartments" [value]="standardDepartment.id">{{standardDepartment.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            
+                            <div class="form-field-row">
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Time Period</mat-label>
+                                    <mat-select formControlName="timePeriod">
+                                        <mat-option *ngFor="let timePeriod of timePeriods" [value]="timePeriod.id">{{timePeriod.shortName}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Department</mat-label>
+                                    <mat-select formControlName="department" (selectionChange)="onSelectDepartment($event.value)">
+                                        <mat-option *ngFor="let department of departments" [value]="department.id">{{department.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </mat-expansion-panel>
+    
+                        <mat-expansion-panel class="mat-elevation-z0" [expanded]="step === 2" (opened)="setStep(2)">
+                            <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span><b>Step 2</b></span>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <span>Select up to 5 Compare Groups</span>
+                            </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            
+                            <div class="form-field-row">
+                                <mat-form-field appearance="fill" style="width: 100%">
+                                    <mat-label>Compare Groups</mat-label>
+                                    <mat-select formControlName="compareGroups" multiple>
+                                        <mat-option *ngFor="let cg of compareGroups" [value]="cg.compareGroupId">{{cg.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </mat-expansion-panel>
+    
+                        <mat-expansion-panel class="mat-elevation-z0" [expanded]="step === 3" (opened)="setStep(3)">
+                            <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <div><span><b>Step 3</b></span></div>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <span>Select dataset parameters</span>
+                            </mat-panel-description>
+                            </mat-expansion-panel-header>
+    
+                            <div style="padding: 8px"><span><b>Notice:</b> up to 3 percentiles for 1 selected CG; 1 percentile for >1 selected CG</span></div>
+    
+                            <div class="form-field-row">
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Measure</mat-label>
+                                    <mat-select formControlName="measure">
+                                        <mat-option *ngFor="let measure of measures" [value]="measure.id">{{measure.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Percentile 1</mat-label>
+                                    <input matInput formControlName="percentile1" type="number">
+                                </mat-form-field>
+                            </div>
+    
+                            <div class="form-field-row">
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Number of Time Periods</mat-label>
+                                    <mat-select formControlName="numberOfTimePeriods">
+                                        <mat-option [value]="1">1</mat-option>
+                                        <mat-option [value]="2">2</mat-option>
+                                        <mat-option [value]="3">3</mat-option>
+                                        <mat-option [value]="4">4</mat-option>
+                                        <mat-option [value]="5">5</mat-option>
+                                        <mat-option [value]="6">6</mat-option>
+                                        <mat-option [value]="7">7</mat-option>
+                                        <mat-option [value]="8">8</mat-option>
+                                        <mat-option [value]="9">9</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Percentile 2</mat-label>
+                                    <input matInput formControlName="percentile2" type="number">
+                                </mat-form-field>
+                            </div>
+    
+                            <div class="form-field-row">
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Trim Level</mat-label>
+                                    <mat-select formControlName="trimLevel">
+                                        <mat-option [value]="trimLevel.StdDev1">Std Dev 1</mat-option>
+                                        <mat-option [value]="trimLevel.StdDev2">Std Dev 2</mat-option>
+                                        <mat-option [value]="trimLevel.StdDev3">Std Dev 3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill" class="form-field">
+                                    <mat-label>Percentile 3</mat-label>
+                                    <input matInput formControlName="percentile3" type="number">
+                                </mat-form-field>
+                            </div>
+                        </mat-expansion-panel>
+    
+                        <mat-expansion-panel class="mat-elevation-z0" [expanded]="step === 4" (opened)="setStep(4)">
+                            <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <div><span><b>Step 4</b></span></div>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <span>Complete report creation</span>
+                            </mat-panel-description>
+                            </mat-expansion-panel-header>
+    
+                            <div style="display: flex;">
+                                <div  class="form-field">
+                                    <mat-form-field appearance="fill" style="width: 100%">
+                                        <mat-label>Report Name</mat-label>
+                                        <input matInput formControlName="reportName">
+                                    </mat-form-field>
+                                    <div><mat-checkbox formControlName="includeReportSummary">Include Report Summary</mat-checkbox></div>
+                                </div>
+                                <section class="form-field">
+                                    <span style="color: rgba(0, 0, 0, 0.37);">Select Run mode</span>
+                                    <div><mat-checkbox formControlName="saveTemplate">Save template</mat-checkbox></div>
+                                    <div><mat-checkbox formControlName="runReport">Run report</mat-checkbox></div>
+                                    <div><mat-checkbox formControlName="runAndViewReport">Run and View report</mat-checkbox></div>
+                                </section>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </form>
+            </div>
+            <div class="create-button">
+                <button mat-flat-button color="primary" [disabled]="!form.valid" (click)="onCreate()">Create</button>
+            </div>
+        </div>
+    </mat-card>
+</div>

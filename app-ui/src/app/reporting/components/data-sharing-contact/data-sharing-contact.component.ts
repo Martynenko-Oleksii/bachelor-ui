@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { BaseSubscriber } from 'src/app/shared/models/base-subscriber';
 import { ApiService } from '../../services/api.service';
 import { CompareGroup } from '../../models/management';
-import { Department } from '../../models/deparatment';
 import { takeUntil } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { DataSharingContactReport } from '../../models/reports';
 import { ReportingMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
+import { Department } from '../../models/parameters';
 
 @Component({
   selector: 'app-data-sharing-contact',

@@ -36,7 +36,7 @@ export class TemplatesComponent extends BaseSubscriber implements OnInit {
     this.getTemplates();
   }
 
-  public onDelete(id: number, name: string): void {
+  public onDelete(id: number, name: string, typeId: number): void {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: {
         entityId: id,
@@ -45,7 +45,14 @@ export class TemplatesComponent extends BaseSubscriber implements OnInit {
         message: `Would you like to delete template "${name}"?`
       },
     });
-    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((added: boolean) => { if (added) this.getTemplates() });
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: boolean) => {
+        if (res) {
+          let index = this.templates[typeId].findIndex(x => x.templateId === id);
+          this.templates[typeId].splice(index, 1);
+        }
+      });
   }
 
   private getTemplates(): void {
