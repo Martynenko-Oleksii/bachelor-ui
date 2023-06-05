@@ -56,11 +56,11 @@ export class ApiService {
   }
 
   public getFacilities(customerId: number): Observable<Facility[]> {
-    return this.http.get<Facility[]>(`${this.baseApi}customers/facilities/${customerId}`, this.httpOptions);
+    return this.http.get<Facility[]>(`${this.baseApi}customers/facilities`, this.httpOptions);
   }
 
   public addFacility(customerId: number, facility: Facility): Observable<Facility> {
-    return this.http.post<Facility>(`${this.baseApi}customers/facilities/${customerId}`, facility, this.httpOptions);
+    return this.http.post<Facility>(`${this.baseApi}customers/facilities`, facility, this.httpOptions);
   }
 
   public aditFacility(facility: Facility): Observable<Object> {
@@ -72,11 +72,11 @@ export class ApiService {
   }
 
   public getUsers(customerId: number): Observable<SecurityUser[]> {
-    return this.http.get<SecurityUser[]>(`${this.baseApi}users/${customerId}`, this.httpOptions);
+    return this.http.get<SecurityUser[]>(`${this.baseApi}users`, this.httpOptions);
   }
 
   public getFacilityGroups(customerId: number): Observable<FacilityGroup[]> {
-    return this.http.get<FacilityGroup[]>(`${this.baseApi}facilityGroups/${customerId}`, this.httpOptions);
+    return this.http.get<FacilityGroup[]>(`${this.baseApi}facilityGroups`, this.httpOptions);
   }
 
   public addFacilityGroup(facilityGroup: FacilityGroup): Observable<FacilityGroup> {
@@ -88,7 +88,7 @@ export class ApiService {
   }
 
   public getDepartmentGroups(customerId: number): Observable<DepartmentGroup[]> {
-    return this.http.get<DepartmentGroup[]>(`${this.baseApi}departmentGroups/${customerId}`, this.httpOptions);
+    return this.http.get<DepartmentGroup[]>(`${this.baseApi}departmentGroups`, this.httpOptions);
   }
 
   public addDepartmentGroup(departmentGroup: DepartmentGroup): Observable<DepartmentGroup> {
