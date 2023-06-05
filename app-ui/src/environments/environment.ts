@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   securityApi: 'http://localhost:8081/',
+  dataApi: 'http://localhost:8082/',
   reportingApi: 'https://localhost:7104/api/',
   
   authority: 'http://localhost:5001',
