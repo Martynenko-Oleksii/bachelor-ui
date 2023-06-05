@@ -24,6 +24,20 @@ export enum SecurityMenuItem {
   Logs = 'logs',
 }
 
+export enum DataMenuItem {
+  DataPeriod = 'data-period',
+  CostCenters = 'cost-centers',
+  MappingTemplates = 'mapping-templates',
+  DataSets = 'data-sets',
+  Accounts = 'accounts',
+  UploadData = 'upload-data',
+  CostCentersMapping = 'cost-centers-mapping',
+  GlPrMapping = 'gl-pr-mapping',
+  DAtaEntering = 'data-entering',
+  UnusedData = 'unused-data',
+  ReportingPeriods = 'reporting-periods',
+}
+
 export enum ReportingMenuItem {
   Templates = 'templates',
   Reports = 'reports',
@@ -43,7 +57,6 @@ export class SharedDataService {
     'data': true,
     'reporting': true,
   };
-
   private menuDataSource = new ReplaySubject<MenuDict | null>(1);
   menuData$ = this.menuDataSource.asObservable();
 
@@ -59,9 +72,25 @@ export class SharedDataService {
     'reset-passwords': true,
     'logs': true
   };
-  
   private securityMenuDataSource = new ReplaySubject<MenuDict | null>(1);
   securityMenuData$ = this.securityMenuDataSource.asObservable();
+
+  private currentDataMenu = '';
+  private inactiveDataItems: MenuDict = {
+    'data-period': true,
+    'cost-centers': true,
+    'mapping-templates': true,
+    'data-sets': true,
+    'accounts': true,
+    'upload-data': true,
+    'cost-centers-mapping': true,
+    'gl-pr-mapping': true,
+    'data-entering': true,
+    'unused-data': true,
+    'reporting-periods': true,
+  };
+  private dataMenuDataSource = new ReplaySubject<MenuDict | null>(1);
+  dataMenuData$ = this.dataMenuDataSource.asObservable();
 
   private currentReportingMenu = '';
   private inactiveReportingItems: MenuDict = {
@@ -71,14 +100,13 @@ export class SharedDataService {
     'data-sharing-report': true,
     'cg-trend': true,
   };
-  
   private reportingMenuDataSource = new ReplaySubject<MenuDict | null>(1);
   reportingMenuData$ = this.reportingMenuDataSource.asObservable();
 
   constructor() {
     this.menuDataSource.next(null);
-    this.securityMenuDataSource.next(null);
-    this.reportingMenuDataSource.next(null);
+
+    this.removeData();
   }
 
   public updateActiveMenu(name: string): void {
@@ -99,6 +127,17 @@ export class SharedDataService {
     this.securityMenuDataSource.next(this.inactiveSecurityItems);
   }
 
+  public updateDataActiveMenu(name: string): void {
+    if (this.currentDataMenu.length > 0) {
+      this.inactiveDataItems[this.currentDataMenu] = true;
+    }
+    
+    this.inactiveDataItems[name] = false;
+    this.currentDataMenu = name;
+
+    this.dataMenuDataSource.next(this.inactiveDataItems);
+  }
+
   public updateReportingActiveMenu(name: string): void {
     if (this.currentReportingMenu.length > 0) {
       this.inactiveReportingItems[this.currentReportingMenu] = true;
@@ -108,5 +147,11 @@ export class SharedDataService {
     this.currentReportingMenu = name;
 
     this.reportingMenuDataSource.next(this.inactiveReportingItems);
+  }
+
+  public removeData(): void {
+    this.securityMenuDataSource.next(null);
+    this.dataMenuDataSource.next(null);
+    this.reportingMenuDataSource.next(null);
   }
 }

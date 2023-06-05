@@ -146,3 +146,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-card {
   overflow: auto;
 }
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}

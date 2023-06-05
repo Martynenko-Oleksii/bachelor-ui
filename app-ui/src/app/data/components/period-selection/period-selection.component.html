@@ -1,0 +1,28 @@
+<mat-card style="height: 100%;padding: 16px;">
+    <div class="header">
+        <span>Data Period</span>
+    </div>
+    <div class="content">
+        <form [formGroup]="form" style="width: 30%">
+            <div class="form-field-row">
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Facility</mat-label>
+                    <mat-select formControlName="facility">
+                        <mat-option *ngFor="let facility of facilities" [value]="facility">{{facility.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="form-field-row">
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Time Period</mat-label>
+                    <mat-select formControlName="timePeriod">
+                        <mat-option *ngFor="let timePeriod of timePeriods" [value]="timePeriod">{{timePeriod.timePeriod.shortName}} ({{timePeriod.status}})</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="button">
+                <button mat-button (click)="saveDataPeriod()" color="primary" [disabled]="!form.valid">Save</button>
+            </div>
+        </form>
+    </div>
+</mat-card>

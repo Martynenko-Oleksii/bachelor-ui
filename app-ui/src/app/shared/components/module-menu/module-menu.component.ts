@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GlobalRoles, ReportingRoles } from '../../enums/user-roles';
 import { Router } from '@angular/router';
 import { MenuDict, SharedDataService } from '../../services/shared-data.service';
+import { takeUntil } from 'rxjs';
+import { BaseSubscriber } from '../../models/base-subscriber';
 
 interface MenuMapping {
   name: string;
@@ -73,12 +75,12 @@ const reportingMenuSections: { [key: string]: MenuMapping } = {
     items: ["Data Sharing Contact"],
     urls: ["data-sharing-report"],
   },
-  // 'generic-reports': {
+  // 'department-reports': {
   //   name: "Department",
   //   items: ["Facility Trend", "Facility and CG Trend"],
   //   urls: ["facility-trend", "facility-cg-trend"],
   // },
-  'department-reports': {
+  'generic-reports': {
     name: "Generic",
     // items: ["Compare Group Trend", "Comparison Details"],
     // urls: ["cg-trend", "comparison-details"],
@@ -92,7 +94,7 @@ const reportingMenuSections: { [key: string]: MenuMapping } = {
   templateUrl: './module-menu.component.html',
   styleUrls: ['./module-menu.component.scss']
 })
-export class ModuleMenuComponent implements OnInit {
+export class ModuleMenuComponent extends BaseSubscriber implements OnInit {
   private startPath: string = '';
   private moduleSelected: boolean = false;
 
@@ -102,18 +104,27 @@ export class ModuleMenuComponent implements OnInit {
   @Input() selectedModule: GlobalRoles | undefined;
   @Input() userRoles: string[] = [];
 
-  constructor(private router: Router, private shared: SharedDataService) { }
+  constructor(private router: Router, private shared: SharedDataService) {
+    super();
+  }
 
   public ngOnInit(): void {
-    this.shared.securityMenuData$.subscribe(res => {
-      if (res && !this.moduleSelected) {
+    this.shared.securityMenuData$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      if (res) {
         this.menuDict = res;
         this.moduleSelected = true;
       }
     });
 
-    this.shared.reportingMenuData$.subscribe(res => {
-      if (res && !this.moduleSelected) {
+    this.shared.reportingMenuData$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      if (res) {
+        this.menuDict = res;
+        this.moduleSelected = true;
+      }
+    });
+
+    this.shared.dataMenuData$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      if (res) {
         this.menuDict = res;
         this.moduleSelected = true;
       }
@@ -148,5 +159,11 @@ export class ModuleMenuComponent implements OnInit {
     }
 
     return true;
+  }
+
+  public override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    
+    this.shared.removeData();
   }
 }

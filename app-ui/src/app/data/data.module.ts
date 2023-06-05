@@ -6,11 +6,14 @@ import { DataComponent } from './data.component';
 import { AppMaterialModule } from '../app-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { PeriodSelectionComponent } from './components/period-selection/period-selection.component';
 
 
 @NgModule({
   declarations: [
-    DataComponent
+    DataComponent,
+    PeriodSelectionComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ]
 })
 export class DataModule { }

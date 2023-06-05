@@ -4,12 +4,13 @@
     width: calc(100vw - 32px);
     height: calc(100% - 36px);
 
-    & .menu {
+    & .menu, .details {
         width: 18.3%;
         height: 100%;
     }
 
     & .content {
+        padding: 0 16px;
         width: 62.5%;
         height: 100%;
     }

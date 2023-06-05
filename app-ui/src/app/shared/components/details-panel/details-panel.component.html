@@ -3,4 +3,10 @@
         <span class="title">{{detailsItem.title}}:</span>
         <span *ngFor="let itemValue of detailsItem.values" class="value">{{itemValue}}</span>
     </div>
+    <div *ngIf="displayDataPerio && !!dataperiod" class="details-item">
+        <span class="title">Facility:</span>
+        <span class="value">{{dataperiod.facility.name}}</span>
+        <span class="title">Time Period:</span>
+        <span class="value">{{dataperiod.timePeriodInfo.timePeriod.shortName}}</span>
+    </div>
 </mat-card>
