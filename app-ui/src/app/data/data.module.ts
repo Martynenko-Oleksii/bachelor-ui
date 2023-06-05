@@ -8,12 +8,14 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { PeriodSelectionComponent } from './components/period-selection/period-selection.component';
+import { UploadDataComponent } from './components/upload-data/upload-data.component';
 
 
 @NgModule({
   declarations: [
     DataComponent,
-    PeriodSelectionComponent
+    PeriodSelectionComponent,
+    UploadDataComponent
   ],
   imports: [
     CommonModule,

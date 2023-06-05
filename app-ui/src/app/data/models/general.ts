@@ -20,3 +20,8 @@ export interface SelectedDataPeriod {
   timePeriodInfo: TimePeriodInfo;
   facility: Facility;
 }
+
+export interface SelectedDataPeriodDto {
+    facilityId: number;
+    timePeriodInfoId: number;
+}
