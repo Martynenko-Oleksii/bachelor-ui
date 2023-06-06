@@ -14,3 +14,8 @@ export interface FileMapping {
 export interface Mapping {
     [key: string]: string;
 }
+
+export interface ErrorMessage {
+    columnValue: string[];
+    columnError: string[];
+}

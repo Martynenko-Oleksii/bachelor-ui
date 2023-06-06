@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Facility, TimePeriodInfo } from '../models/general';
-import { FileMapping, FileType } from '../models/upload-data';
+import { ErrorMessage, FileMapping, FileType } from '../models/upload-data';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +43,10 @@ export class ApiService {
 
   public editMapping(mapping: FileMapping): Observable<Object> {
     return this.http.put<Object>(`${this.baseApi}fileMappings`, mapping, this.httpOptions);
+  }
+
+  public uploadData(formData: FormData): Observable<ErrorMessage[]> {
+    return this.http.post<ErrorMessage[]>(`${this.baseApi}dataLoad`, formData, this.httpOptions);
   }
 
 

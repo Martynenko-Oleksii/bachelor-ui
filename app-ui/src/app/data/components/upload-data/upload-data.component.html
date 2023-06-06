@@ -2,4 +2,55 @@
     <div class="header">
         <span>Upload File</span>
     </div>
+    <div style="display: flex;justify-content: center;">
+        <div style="width: 30%;">
+            <form [formGroup]="form">
+                <div class="form-field-row">
+                    <mat-form-field appearance="fill" class="form-field" style="width: 100%">
+                        <mat-label>File Type</mat-label>
+                        <mat-select formControlName="fileType" (selectionChange)="onFileTypeSelected($event.value)">
+                            <mat-option *ngFor="let fileType of fileTypes" [value]="fileType.id">{{fileType.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-field-row">
+                    <mat-form-field appearance="fill" class="form-field" style="width: 100%">
+                        <mat-label>Column Delimeter</mat-label>
+                        <mat-select formControlName="delimeter">
+                            <mat-option [value]="delimeter.Coma">Coma (,)</mat-option>
+                            <mat-option [value]="delimeter.Semicolon">Semicolon (;)</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-field-row" style="padding-bottom: 8px;">
+                    <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileUpload>
+                    <div class="form-field" style="width: 100%;">
+                         <button mat-mini-fab color="primary" class="upload-btn"
+                           (click)="fileUpload.click()">
+                            <mat-icon>attach_file</mat-icon>
+                         </button>
+                         {{fileName || "No file uploaded yet."}}
+                     </div>
+                </div>
+                <div class="form-field-row">
+                    <mat-form-field appearance="fill" class="form-field" style="width: 100%">
+                        <mat-label>File Mapping</mat-label>
+                        <mat-select formControlName="mapping">
+                            <mat-option *ngFor="let mapping of mappings[selectedFileType?.name ?? '']" [value]="mapping.id">{{mapping.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-field-row">
+                    <mat-form-field appearance="fill" class="form-field">
+                        <mat-label>Data Set Name</mat-label>
+                        <input matInput formControlName="dataSetName">
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </mat-card>
