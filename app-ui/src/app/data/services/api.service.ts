@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Facility, TimePeriodInfo } from '../models/general';
-import { CostCenter, ErrorMessage, FileMapping, FileType } from '../models/upload-data';
+import { Account, CostCenter, ErrorMessage, FileMapping, FileType } from '../models/upload-data';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +60,19 @@ export class ApiService {
   public editCostCenter(cc: CostCenter): Observable<Object> {
     return this.http.put<Object>(`${this.baseApi}costCenters`, cc, this.httpOptions);
   }
+
+  public getAccounts(id: number): Observable<Account[]> {
+    return this.http.get<Account[]>(`${this.baseApi}accounts/${id}`, this.httpOptions);
+  }
+
+  public createAccount(account: Account): Observable<Account> {
+    return this.http.post<Account>(`${this.baseApi}accounts`, account, this.httpOptions);
+  }
+
+  public editAccount(account: Account): Observable<Object> {
+    return this.http.put<Object>(`${this.baseApi}accounts`, account, this.httpOptions);
+  }
+
 
 
   public deleteEntity(path: string): Observable<Object> {

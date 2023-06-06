@@ -25,3 +25,21 @@ export interface CostCenter {
     description: string;
     facilityID: number;
 }
+
+export interface Account {
+    code: string;
+    description: string;
+    source: AccountSource;
+    type: string;
+    facilityId: number;
+}
+
+export enum AccountSource {
+    GL = 'GL',
+    PR = 'PR'
+}
+
+export const accountTypes: { [key: string]: string[] } = {
+    'GL': ['E', 'R', 'V', 'A', 'L', 'I'],
+    'PR': ['P', 'N', 'C']
+}

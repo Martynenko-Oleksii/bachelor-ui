@@ -14,6 +14,8 @@ import { FileMappingCreationComponent } from './components/file-mapping-creation
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { CostCentersComponent } from './components/cost-centers/cost-centers.component';
 import { CostCenterCreationComponent } from './components/cost-center-creation/cost-center-creation.component';
+import { AccountsComponent } from './components/accounts/accounts.component';
+import { AccountCreationComponent } from './components/account-creation/account-creation.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { CostCenterCreationComponent } from './components/cost-center-creation/c
     FileMappingCreationComponent,
     DeleteDialogComponent,
     CostCentersComponent,
-    CostCenterCreationComponent
+    CostCenterCreationComponent,
+    AccountsComponent,
+    AccountCreationComponent
   ],
   imports: [
     CommonModule,

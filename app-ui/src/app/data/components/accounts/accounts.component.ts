@@ -1,25 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BaseSubscriber } from 'src/app/shared/models/base-subscriber';
-import { DataMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
-import { ApiService } from '../../services/api.service';
-import { MatDialog } from '@angular/material/dialog';
-import { takeUntil } from 'rxjs';
-import { CostCenter } from '../../models/upload-data';
-import { MatTableDataSource } from '@angular/material/table';
+import { Account } from '../../models/upload-data';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { CostCenterCreationComponent } from '../cost-center-creation/cost-center-creation.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { BaseSubscriber } from 'src/app/shared/models/base-subscriber';
+import { MatDialog } from '@angular/material/dialog';
+import { SharedDataService, DataMenuItem } from 'src/app/shared/services/shared-data.service';
+import { ApiService } from '../../services/api.service';
+import { AccountCreationComponent } from '../account-creation/account-creation.component';
+import { takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-cost-centers',
-  templateUrl: './cost-centers.component.html',
-  styleUrls: ['./cost-centers.component.scss']
+  selector: 'app-accounts',
+  templateUrl: './accounts.component.html',
+  styleUrls: ['./accounts.component.scss']
 })
-export class CostCentersComponent extends BaseSubscriber implements OnInit {
+export class AccountsComponent extends BaseSubscriber implements OnInit {
   private facilityId: number = 0;
 
-  public displayedColumns: string[] = ['number', 'description', 'edit'];
-  public dataSource: MatTableDataSource<CostCenter> = {} as MatTableDataSource<CostCenter>;
+  public displayedColumns: string[] = ['code', 'description', 'source', 'type', 'edit'];
+  public dataSource: MatTableDataSource<Account> = {} as MatTableDataSource<Account>;
   
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -29,28 +29,29 @@ export class CostCentersComponent extends BaseSubscriber implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.shared.updateDataActiveMenu(DataMenuItem.CostCenters);
+    this.shared.updateDataActiveMenu(DataMenuItem.Accounts);
 
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator!;
     this.dataSource.sort = this.sort!;
 
     this.getFacilityId();
-    this.getCostCenters();
+    this.getAccounts();
   }
 
   public onCreate(): void {
-    let dialogRef = this.dialog.open(CostCenterCreationComponent, {
+    let dialogRef = this.dialog.open(AccountCreationComponent, {
       data: {
         isCreation: true,
-        costCenter: {}
+        account: {}
       }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (!!res && res.added) {
+        console.log(res);
         let data = this.dataSource.data;
-        data.push(res.costCenter);
+        data.push(res.account);
         this.dataSource.data = data;
       }
     })
@@ -65,20 +66,19 @@ export class CostCentersComponent extends BaseSubscriber implements OnInit {
     }
   }
 
-  public onEdit(costCenter: CostCenter): void {
-    let dialogRef = this.dialog.open(CostCenterCreationComponent, {
+  public onEdit(account: Account): void {
+    let dialogRef = this.dialog.open(AccountCreationComponent, {
       data: {
         isCreation: false,
-        costCenter: costCenter
+        account: account
       }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (!!res && res.updated) {
-        let cc = this.dataSource.data.find(x => x.number === costCenter.number);
+        let cc = this.dataSource.data.find(x => x.code === account.code);
         if (cc) {
-          cc.number = res.costCenter.number;
-          cc.description = res.costCenter.description;
+          cc.description = res.account.description;
         }
       }
     });
@@ -92,8 +92,8 @@ export class CostCentersComponent extends BaseSubscriber implements OnInit {
     }
   }
 
-  private getCostCenters(): void {
-    this.api.getConstCenters(this.facilityId)
+  private getAccounts(): void {
+    this.api.getAccounts(this.facilityId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => {
         if (res) {

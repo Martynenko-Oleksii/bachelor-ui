@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Create Account</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Code</mat-label>
+                <input matInput formControlName="code">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Source</mat-label>
+                <mat-select formControlName="source" (selectionChange)="onSourceSelect($event.value)">
+                    <mat-option [value]="accountSource.GL">General Ledger</mat-option>
+                    <mat-option [value]="accountSource.PR">Payroll</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-button (click)="onSubmit()" [disabled]="!form.valid">Submit</button>
+        </div>
+    </form>
+</div>

@@ -80,14 +80,14 @@ export class UploadDataComponent extends BaseSubscriber implements OnInit {
       console.log(value);
     });
 
-    this.api.uploadData(this.formData)
-      .subscribe(res => {
-        if (res) {
-          if (res.length === 0) {
-            this.router.navigate(['/data/upload-data']);
-          }
-        }
-      });
+    // this.api.uploadData(this.formData)
+    //   .subscribe(res => {
+    //     if (res) {
+    //       if (res.length === 0) {
+    //         this.router.navigate(['/data/upload-data']);
+    //       }
+    //     }
+    //   });
   }
 
   private getFileTypes(): void {
