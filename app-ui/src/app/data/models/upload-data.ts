@@ -6,5 +6,11 @@ export interface FileType {
 export interface FileMapping {
     id: number;
     name: string;
+    description: string;
     mappingJson: string;
+    fileType: FileType;
+}
+
+export interface Mapping {
+    [key: string]: string;
 }

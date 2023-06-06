@@ -7,7 +7,7 @@
             <div class="form-field-row">
                 <mat-form-field appearance="fill" class="form-field">
                     <mat-label>Facility</mat-label>
-                    <mat-select formControlName="facility">
+                    <mat-select formControlName="facility" (selectionChange)="onSelectFacility($event.value.id)">
                         <mat-option *ngFor="let facility of facilities" [value]="facility">{{facility.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>

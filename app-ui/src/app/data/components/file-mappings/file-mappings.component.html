@@ -1,0 +1,38 @@
+<mat-card style="height: 100%;padding: 16px;">
+    <div class="header">
+        <span>File Mappings</span>
+        <button mat-flat-button color="primary" (click)="onCreate()">Create New</button>
+    </div>
+    <div *ngIf="fileTypes.length > 0" class="content">
+        <div *ngFor="let fileType of fileTypes">
+            <mat-expansion-panel class="mat-elevation-z0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{fileType.name}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div *ngFor="let mapping of mappings[fileType.name]" class="template-item">
+                <div class="title">
+                    <span>{{mapping.name}}</span>
+                </div>
+                <div class="status">
+                    <span>{{mapping.description}}</span>
+                </div>
+                <div class="actions">
+                    <div class="action" (click)="onEdit(mapping)">
+                        <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Edit">edit</span>
+                    </div>
+                    <div class="action" (click)="onDelete(mapping.id, mapping.name, fileType.name)">
+                        <span class="material-icons" style="color: #b00020;font-size: 24px;" matTooltip="Delete">delete</span>
+                    </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+        </div>
+    </div>
+
+    <div *ngIf="fileTypes.length === 0" class="no-data-element">
+        <h2>No Data</h2>
+    </div>
+</mat-card>

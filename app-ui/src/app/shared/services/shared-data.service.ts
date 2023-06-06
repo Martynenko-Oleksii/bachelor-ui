@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
+import { SelectedDataPeriod } from 'src/app/data/models/general';
 
 export interface MenuDict {
   [key: string]: boolean
@@ -103,8 +104,12 @@ export class SharedDataService {
   private reportingMenuDataSource = new ReplaySubject<MenuDict | null>(1);
   reportingMenuData$ = this.reportingMenuDataSource.asObservable();
 
+  private dataPeriodSource = new ReplaySubject<SelectedDataPeriod | null>(1);
+  dataPeriod$ = this.dataPeriodSource.asObservable();
+
   constructor() {
     this.menuDataSource.next(null);
+    this.dataPeriodSource.next(null);
 
     this.removeData();
   }
@@ -153,5 +158,9 @@ export class SharedDataService {
     this.securityMenuDataSource.next(null);
     this.dataMenuDataSource.next(null);
     this.reportingMenuDataSource.next(null);
+  }
+
+  public updateDataPeriod(dataPeriod: SelectedDataPeriod): void {
+    this.dataPeriodSource.next(dataPeriod);
   }
 }

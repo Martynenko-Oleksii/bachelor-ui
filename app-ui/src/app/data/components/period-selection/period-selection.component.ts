@@ -36,9 +36,11 @@ export class PeriodSelectionComponent extends BaseSubscriber implements OnInit {
 
   public saveDataPeriod(): void {
     let dataPeriod: SelectedDataPeriod = {
-      timePeriodInfo: this.form.get('facility')!.value!,
-      facility: this.form.get('timePeriod')!.value!,
+      timePeriodInfo: this.form.get('timePeriod')!.value!,
+      facility: this.form.get('facility')!.value!
     };
+
+    this.shared.updateDataPeriod(dataPeriod);
 
     localStorage.setItem('dataPeriod', JSON.stringify(dataPeriod));
   }
@@ -59,6 +61,7 @@ export class PeriodSelectionComponent extends BaseSubscriber implements OnInit {
       .subscribe((periods: TimePeriodInfo[]) => {
         if (periods) {
           this.timePeriods = periods;
+          this.form.get('timePeriod')?.enable();
         }
       });
   }

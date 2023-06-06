@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Facility, TimePeriodInfo } from '../models/general';
+import { FileMapping, FileType } from '../models/upload-data';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,27 @@ export class ApiService {
 
   public getTimePeriods(id: number): Observable<TimePeriodInfo[]> {
     return this.http.get<TimePeriodInfo[]>(`${this.baseApi}configuration/currentTimePeriod/${id}`, this.httpOptions);
+  }
+
+  public getFileTypes(): Observable<FileType[]> {
+    return this.http.get<FileType[]>(`${this.baseApi}fileMappings/fileTypes`, this.httpOptions);
+  }
+
+  public getMappings(): Observable<FileMapping[]> {
+    return this.http.get<FileMapping[]>(`${this.baseApi}fileMappings`, this.httpOptions);
+  }
+
+  public createMapping(mapping: FileMapping): Observable<FileMapping> {
+    return this.http.post<FileMapping>(`${this.baseApi}fileMappings`, mapping, this.httpOptions);
+  }
+
+  public editMapping(mapping: FileMapping): Observable<Object> {
+    return this.http.put<Object>(`${this.baseApi}fileMappings`, mapping, this.httpOptions);
+  }
+
+
+
+  public deleteEntity(path: string): Observable<Object> {
+    return this.http.delete<Object>(`${this.baseApi}${path}`, this.httpOptions);
   }
 }

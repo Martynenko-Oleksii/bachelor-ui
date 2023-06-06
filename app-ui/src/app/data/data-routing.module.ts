@@ -4,6 +4,7 @@ import { DataComponent } from './data.component';
 import { DataMenuItem } from '../shared/services/shared-data.service';
 import { PeriodSelectionComponent } from './components/period-selection/period-selection.component';
 import { UploadDataComponent } from './components/upload-data/upload-data.component';
+import { FileMappingsComponent } from './components/file-mappings/file-mappings.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
     children: [
       { path: DataMenuItem.DataPeriod, component: PeriodSelectionComponent },
       { path: DataMenuItem.UploadData, component: UploadDataComponent },
+      { path: DataMenuItem.MappingTemplates, component: FileMappingsComponent },
     ]
   }
 ];

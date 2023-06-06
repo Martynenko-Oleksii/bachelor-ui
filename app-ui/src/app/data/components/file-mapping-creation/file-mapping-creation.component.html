@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Create File Mapping Template</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description">
+            </mat-form-field>
+        </div>
+
+        <div class="form-field-row">
+            <mat-form-field appearance="fill" class="form-field" style="width: 100%">
+                <mat-label>File Type</mat-label>
+                <mat-select formControlName="fileType" (selectionChange)="onFileTypeSelected($event.value)">
+                    <mat-option *ngFor="let fileType of fileTypes" [value]="fileType.id">{{fileType.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <form [formGroup]="mappingForm" *ngIf="selectedFileType">
+        <div *ngFor="let fileTypeColumn of fileTypeColumns[selectedFileType.name]; index as i" class="form-field-row">
+            <mat-label class="form-field">{{fileTypeColumn}}</mat-label>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Column Number</mat-label>
+                <mat-select formControlName="column{{i+1}}">
+                    <mat-option value="COLUMN 1">COLUMN 1</mat-option>
+                    <mat-option value="COLUMN 2">COLUMN 2</mat-option>
+                    <mat-option value="COLUMN 3">COLUMN 3</mat-option>
+                    <mat-option value="COLUMN 4">COLUMN 4</mat-option>
+                    <mat-option value="COLUMN 5">COLUMN 5</mat-option>
+                    <mat-option value="COLUMN 6">COLUMN 5</mat-option>
+                    <mat-option value="COLUMN 7">COLUMN 5</mat-option>
+                    <mat-option value="COLUMN 8">COLUMN 5</mat-option>
+                    <mat-option value="COLUMN 9">COLUMN 5</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid || !mappingForm.valid">Submit</button>
+    </div>
+</div>

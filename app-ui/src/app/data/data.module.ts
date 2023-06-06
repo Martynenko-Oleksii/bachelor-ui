@@ -9,13 +9,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { PeriodSelectionComponent } from './components/period-selection/period-selection.component';
 import { UploadDataComponent } from './components/upload-data/upload-data.component';
+import { FileMappingsComponent } from './components/file-mappings/file-mappings.component';
+import { FileMappingCreationComponent } from './components/file-mapping-creation/file-mapping-creation.component';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
   declarations: [
     DataComponent,
     PeriodSelectionComponent,
-    UploadDataComponent
+    UploadDataComponent,
+    FileMappingsComponent,
+    FileMappingCreationComponent,
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,41 @@
+.header {
+    font-size: 20px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+
+
+.content {
+    padding: 16px;
+
+    & .template-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & .title {
+            width: 50%;
+        }
+
+        & .actions {
+            display: flex;
+            align-items: center;
+
+            & .action {
+                padding: 8px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #E1F4FC;
+                }
+            }
+        }
+    }
+}
