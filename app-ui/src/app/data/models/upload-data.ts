@@ -19,3 +19,9 @@ export interface ErrorMessage {
     columnValue: string[];
     columnError: string[];
 }
+
+export interface CostCenter {
+    number: string;
+    description: string;
+    facilityID: number;
+}

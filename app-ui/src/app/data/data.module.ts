@@ -12,6 +12,8 @@ import { UploadDataComponent } from './components/upload-data/upload-data.compon
 import { FileMappingsComponent } from './components/file-mappings/file-mappings.component';
 import { FileMappingCreationComponent } from './components/file-mapping-creation/file-mapping-creation.component';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { CostCentersComponent } from './components/cost-centers/cost-centers.component';
+import { CostCenterCreationComponent } from './components/cost-center-creation/cost-center-creation.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
     UploadDataComponent,
     FileMappingsComponent,
     FileMappingCreationComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    CostCentersComponent,
+    CostCenterCreationComponent
   ],
   imports: [
     CommonModule,
