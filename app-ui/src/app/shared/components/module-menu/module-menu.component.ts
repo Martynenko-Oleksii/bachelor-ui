@@ -50,14 +50,14 @@ const dataMenuSections: { [key: string]: MenuMapping } = {
     items: ["Map GL/PR Entries"],
     urls: ["gl-pr-mapping"],
   },
-  'data-entry': {
-    name: "Data Entry",
-    items: ["Enter Data"],
-    urls: ["data-entering"],
-  },
+  // 'data-entry': {
+  //   name: "Data Entry",
+  //   items: ["Enter Data"],
+  //   urls: ["data-entering"],
+  // },
   'data-administration': {
     name: "Administration",
-    items: ["Unused Data", "Reportin Periods"],
+    items: ["Unused Data", "Reporting Periods"],
     urls: ["unused-data", "reporting-periods"],
   }
 }

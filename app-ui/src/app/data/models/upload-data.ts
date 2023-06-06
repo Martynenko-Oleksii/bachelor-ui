@@ -24,6 +24,21 @@ export interface CostCenter {
     number: string;
     description: string;
     facilityID: number;
+    department: Department | null;
+}
+
+export interface Department {
+    id: number;
+    standardDepartmentId: number;
+    name: string;
+    shortName: string;
+    facilityId: number;
+}
+
+export interface StandardDepartment {
+    id: number;
+    name: string;
+    description: string;
 }
 
 export interface Account {

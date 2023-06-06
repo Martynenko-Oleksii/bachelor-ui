@@ -7,6 +7,7 @@ import { UploadDataComponent } from './components/upload-data/upload-data.compon
 import { FileMappingsComponent } from './components/file-mappings/file-mappings.component';
 import { CostCentersComponent } from './components/cost-centers/cost-centers.component';
 import { AccountsComponent } from './components/accounts/accounts.component';
+import { CostCentersMappingComponent } from './components/cost-centers-mapping/cost-centers-mapping.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: DataMenuItem.MappingTemplates, component: FileMappingsComponent },
       { path: DataMenuItem.CostCenters, component: CostCentersComponent },
       { path: DataMenuItem.Accounts, component: AccountsComponent },
+      { path: DataMenuItem.CostCentersMapping, component: CostCentersMappingComponent },
     ]
   }
 ];

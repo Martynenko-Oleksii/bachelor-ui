@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Facility, TimePeriodInfo } from '../models/general';
-import { Account, CostCenter, ErrorMessage, FileMapping, FileType } from '../models/upload-data';
+import { Account, CostCenter, Department, ErrorMessage, FileMapping, FileType, StandardDepartment } from '../models/upload-data';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +71,42 @@ export class ApiService {
 
   public editAccount(account: Account): Observable<Object> {
     return this.http.put<Object>(`${this.baseApi}accounts`, account, this.httpOptions);
+  }
+
+
+
+  public getStandardDepartments(id: number): Observable<StandardDepartment[]> {
+    return this.http.get<StandardDepartment[]>(`${this.baseApi}CCMapping/standardDepartment/${id}`, this.httpOptions);
+  }
+
+  public geCostCenterMappings(id: number): Observable<CostCenter[]> {
+    return this.http.get<CostCenter[]>(`${this.baseApi}CCMapping/costCenter/${id}`, this.httpOptions);
+  }
+
+  public getDepartments(facilityId: number, stdDeptId: number): Observable<Department[]> {
+    return this.http.get<Department[]>(`${this.baseApi}CCMapping/department`, {
+      headers: (this.httpOptions as any).headers,
+      params: {
+        facilityId: facilityId,
+        standardDepartmentId: stdDeptId
+      }
+    });
+  }
+
+  public updateCostCEnterMapping(cc: CostCenter): Observable<Object> {
+    return this.http.put(`${this.baseApi}CCMapping/costCenter`, cc, this.httpOptions);
+  }
+
+  public creaateNewDept(dept: Department): Observable<Department> {
+    return this.http.post<Department>(`${this.baseApi}CCMapping/department`, dept, this.httpOptions);
+  }
+
+  public deleteDept(id: number): Observable<Object> {
+    return this.http.delete(`${this.baseApi}CCMapping/department/${id}`, this.httpOptions);
+  }
+
+  public confirmMapping(id: number): Observable<{completed: boolean, unmapped: CostCenter[]}> {
+    return this.http.get<{completed: boolean, unmapped: CostCenter[]}>(`${this.baseApi}CCMapping/confirm/${id}`, this.httpOptions);
   }
 
 

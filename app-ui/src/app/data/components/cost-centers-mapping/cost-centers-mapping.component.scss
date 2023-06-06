@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+  }
+    .header {
+      font-size: 20px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+  }
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  ::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content:center;
+  }

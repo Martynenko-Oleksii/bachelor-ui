@@ -32,7 +32,8 @@ export class CostCenterCreationComponent implements OnInit {
     let costCenter: CostCenter = {
       number: this.form.get('number')!.value!,
       description: this.form.get('description')!.value!,
-      facilityID: this.facilityId
+      facilityID: this.facilityId,
+      department: null
     };
 
     if (this.data.isCreation) {

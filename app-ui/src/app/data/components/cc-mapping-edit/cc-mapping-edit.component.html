@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Update Cost Center Mapping</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Source</mat-label>
+                <mat-select formControlName="stdDept" (selectionChange)="onSelectStdDept($event.value)">
+                    <mat-option *ngFor="let stdDept of data.standardDepartments" [value]="stdDept.id">{{stdDept.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Department</mat-label>
+                <mat-select formControlName="dept">
+                    <mat-option *ngFor="let department of departments" [value]="department.id">{{department.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div>
+        <button *ngIf="!deptAdding" color="accent" mat-button (click)="deptAdding = !deptAdding" style="width: 100%;">Add new Depertment</button>
+    </div>
+
+    <form [formGroup]="deptForm" *ngIf="deptAdding">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Dept Name</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Dept Short Name</mat-label>
+                <input matInput formControlName="shortName">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <button color="accent" mat-button (click)="deptAdding = !deptAdding" style="width: 100%;">Cancel adding new Department</button>
+        </div>
+        <div>
+            <button color="accent" mat-flat-button (click)="onCreateDept()" style="width: 100%;">Create new Department</button>
+        </div>
+    </form>
+
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button (click)="onSave()" [disabled]="!form.valid">Submit</button>
+    </div>
+</div>

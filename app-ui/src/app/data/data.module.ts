@@ -16,6 +16,8 @@ import { CostCentersComponent } from './components/cost-centers/cost-centers.com
 import { CostCenterCreationComponent } from './components/cost-center-creation/cost-center-creation.component';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { AccountCreationComponent } from './components/account-creation/account-creation.component';
+import { CostCentersMappingComponent } from './components/cost-centers-mapping/cost-centers-mapping.component';
+import { CcMappingEditComponent } from './components/cc-mapping-edit/cc-mapping-edit.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { AccountCreationComponent } from './components/account-creation/account-
     CostCentersComponent,
     CostCenterCreationComponent,
     AccountsComponent,
-    AccountCreationComponent
+    AccountCreationComponent,
+    CostCentersMappingComponent,
+    CcMappingEditComponent
   ],
   imports: [
     CommonModule,
