@@ -23,15 +23,15 @@
                         <span>{{report.lastModification | translateDate:'medium'}}</span>
                     </div>
                     <div class="actions">
-                        <div class="action" *ngIf="hasSharingRole">
+                        <!--<div class="action" *ngIf="hasSharingRole">
                             <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Share">share</span>
-                        </div>
+                        </div>-->
                         <div class="action">
                             <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Export">file_download</span>
                         </div>
-                        <div class="action">
+                        <!--<div class="action">
                             <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Edit">edit</span>
-                        </div>
+                        </div>-->
                         <div class="action" (click)="onDelete(report.reportId, report.name, reportType)">
                             <span class="material-icons" style="color: #b00020;font-size: 24px;" matTooltip="Delete">delete</span>
                         </div>
