@@ -55,7 +55,7 @@
         <ng-container matColumnDef="deptElement">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Department Element </th>
           <td mat-cell *matCellDef="let row" class="cell">
-            <mat-select (selectionChange)="onChangeMapping(row.mappingId, $event.value)" [(value)]="row.departmentElement.id">
+            <mat-select (selectionChange)="onChangeMapping(row.mappingId, $event.value)" [value]="row.departmentElement?.id">
                 <mat-option *ngFor="let departmentElement of departmentElements" [value]="departmentElement.id">{{departmentElement.name}}</mat-option>
             </mat-select>
           </td>

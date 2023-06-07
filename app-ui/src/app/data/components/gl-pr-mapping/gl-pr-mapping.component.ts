@@ -143,6 +143,8 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
 
     this.getDepartmentElements(this.costCenters.find(x => x.number === ccNumber)!.department!.standardDepartmentId!);
 
+    console.log(this.costCenters.find(x => x.number === ccNumber)!.department!.standardDepartmentId!);
+
     this.api.getMappingRows(mapped, valueTypeId, accountCode, ccNumber)
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => {
@@ -154,6 +156,7 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
   }
 
   private getDepartmentElements(stdDeptId: number): void {
+    this.departmentElements = [];
     this.api.getDeprElements(stdDeptId)
       .pipe(takeUntil(this.departmentElements))
       .subscribe(res => {
