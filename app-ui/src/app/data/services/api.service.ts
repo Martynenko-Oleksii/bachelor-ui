@@ -169,4 +169,10 @@ export class ApiService {
   public deleteEntity(path: string): Observable<Object> {
     return this.http.delete<Object>(`${this.baseApi}${path}`, this.httpOptions);
   }
+
+
+
+  public closeTimePeriod(id: number): Observable<Object> {
+    return this.http.put(`${this.baseApi}timePeriod/${id}`, null, this.httpOptions);
+  }
 }

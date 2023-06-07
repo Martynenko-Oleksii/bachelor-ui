@@ -160,7 +160,7 @@ export class SharedDataService {
     this.reportingMenuDataSource.next(null);
   }
 
-  public updateDataPeriod(dataPeriod: SelectedDataPeriod): void {
+  public updateDataPeriod(dataPeriod: SelectedDataPeriod | null): void {
     this.dataPeriodSource.next(dataPeriod);
   }
 }

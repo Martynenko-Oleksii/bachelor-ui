@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+  }
+    .header {
+      font-size: 20px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+  }

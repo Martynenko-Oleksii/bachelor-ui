@@ -19,6 +19,7 @@ import { AccountCreationComponent } from './components/account-creation/account-
 import { CostCentersMappingComponent } from './components/cost-centers-mapping/cost-centers-mapping.component';
 import { CcMappingEditComponent } from './components/cc-mapping-edit/cc-mapping-edit.component';
 import { GlPrMappingComponent } from './components/gl-pr-mapping/gl-pr-mapping.component';
+import { ReportingPeriodsComponent } from './components/reporting-periods/reporting-periods.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { GlPrMappingComponent } from './components/gl-pr-mapping/gl-pr-mapping.c
     AccountCreationComponent,
     CostCentersMappingComponent,
     CcMappingEditComponent,
-    GlPrMappingComponent
+    GlPrMappingComponent,
+    ReportingPeriodsComponent
   ],
   imports: [
     CommonModule,

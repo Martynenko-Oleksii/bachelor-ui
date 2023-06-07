@@ -9,6 +9,7 @@ import { CostCentersComponent } from './components/cost-centers/cost-centers.com
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { CostCentersMappingComponent } from './components/cost-centers-mapping/cost-centers-mapping.component';
 import { GlPrMappingComponent } from './components/gl-pr-mapping/gl-pr-mapping.component';
+import { ReportingPeriodsComponent } from './components/reporting-periods/reporting-periods.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: DataMenuItem.Accounts, component: AccountsComponent },
       { path: DataMenuItem.CostCentersMapping, component: CostCentersMappingComponent },
       { path: DataMenuItem.GlPrMapping, component: GlPrMappingComponent },
+      { path: DataMenuItem.ReportingPeriods, component: ReportingPeriodsComponent },
     ]
   }
 ];
