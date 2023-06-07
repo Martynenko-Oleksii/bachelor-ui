@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Facility, TimePeriodInfo } from '../models/general';
-import { Account, CostCenter, Department, ErrorMessage, FileMapping, FileType, StandardDepartment } from '../models/upload-data';
+import { Account, CostCenter, Department, DepartmentElement, ErrorMessage, FileMapping, FileType, MappingTableRow, StandardDepartment, ValueType } from '../models/upload-data';
 
 @Injectable({
   providedIn: 'root'
@@ -107,6 +107,61 @@ export class ApiService {
 
   public confirmMapping(id: number): Observable<{completed: boolean, unmapped: CostCenter[]}> {
     return this.http.get<{completed: boolean, unmapped: CostCenter[]}>(`${this.baseApi}CCMapping/confirm/${id}`, this.httpOptions);
+  }
+
+
+
+  public getValueTypes(): Observable<ValueType[]> {
+    return this.http.get<ValueType[]>(`${this.baseApi}glPrMapping/accountTypes`, this.httpOptions);
+  }
+
+  public getFilterAccounts(mapped: boolean, valueTypeid: number, facilityId: number): Observable<Account[]> {
+    return this.http.get<Account[]>(`${this.baseApi}glPrMapping/accounts`, {
+      params: {
+        valueTypeId: valueTypeid,
+        mapped: mapped,
+        facilityId: facilityId
+      },
+      headers: (this.httpOptions as any).headers
+    });
+  }
+
+  public getFilterCostCenters(mapped: boolean, valueTypeid: number, code: string, facilityId: number): Observable<CostCenter[]> {
+    return this.http.get<CostCenter[]>(`${this.baseApi}glPrMapping/costCenters`, {
+      params: {
+        valueTypeId: valueTypeid,
+        mapped: mapped,
+        code: code,
+        facilityId: facilityId
+      },
+      headers: (this.httpOptions as any).headers
+    });
+  }
+
+  public getMappingRows(mapped: boolean, valueTypeid: number, code: string, number: string): Observable<MappingTableRow[]> {
+    return this.http.get<MappingTableRow[]>(`${this.baseApi}glPrMapping/mappings`, {
+      params: {
+        valueTypeId: valueTypeid,
+        mapped: mapped,
+        code: code,
+        costCenter: number
+      },
+      headers: (this.httpOptions as any).headers
+    });
+  }
+
+  public getDeprElements(stdDeptId: number): Observable<DepartmentElement[]> {
+    return this.http.get<DepartmentElement[]>(`${this.baseApi}glPrMapping/departmentElements/${stdDeptId}`, this.httpOptions);
+  }
+
+  public updateMapping(mappingId: number, deptElementId: number): Observable<Object> {
+    return this.http.put(`${this.baseApi}glPrMapping`, null, {
+      params: {
+        mappingId: mappingId,
+        departmentElementId: deptElementId
+      },
+      headers: (this.httpOptions as any).headers
+    })
   }
 
 

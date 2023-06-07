@@ -58,3 +58,22 @@ export const accountTypes: { [key: string]: string[] } = {
     'GL': ['E', 'R', 'V', 'A', 'L', 'I'],
     'PR': ['P', 'N', 'C']
 }
+
+export interface ValueType {
+    id: number;
+    name: string;
+}
+
+export interface DepartmentElement {
+    id: number;
+    standardDepartmentId: number;
+    name: string;
+}
+
+export interface MappingTableRow {
+    mappingId: number;
+    costCenter: CostCenter;
+    account: Account;
+    valueType: ValueType;
+    departmentElement: DepartmentElement | null;
+}

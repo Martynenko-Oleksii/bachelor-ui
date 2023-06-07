@@ -18,6 +18,7 @@ import { AccountsComponent } from './components/accounts/accounts.component';
 import { AccountCreationComponent } from './components/account-creation/account-creation.component';
 import { CostCentersMappingComponent } from './components/cost-centers-mapping/cost-centers-mapping.component';
 import { CcMappingEditComponent } from './components/cc-mapping-edit/cc-mapping-edit.component';
+import { GlPrMappingComponent } from './components/gl-pr-mapping/gl-pr-mapping.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CcMappingEditComponent } from './components/cc-mapping-edit/cc-mapping-
     AccountsComponent,
     AccountCreationComponent,
     CostCentersMappingComponent,
-    CcMappingEditComponent
+    CcMappingEditComponent,
+    GlPrMappingComponent
   ],
   imports: [
     CommonModule,

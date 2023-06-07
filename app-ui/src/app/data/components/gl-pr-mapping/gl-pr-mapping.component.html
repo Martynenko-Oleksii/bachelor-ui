@@ -1,0 +1,71 @@
+<mat-card style="height: 100%;padding: 16px;">
+    <div class="header">
+      <span>GL/PR Mapping</span>
+    </div>
+    <div>
+        <form [formGroup]="filtersForm">
+            <div class="form-field-row">
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Mapping Status</mat-label>
+                    <mat-select formControlName="mapped" (selectionChange)="onSelectMapped()">
+                        <mat-option [value]="false">Unmapped</mat-option>
+                        <mat-option [value]="true">Mapped</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Account Type</mat-label>
+                    <mat-select formControlName="valueType" (selectionChange)="onSelectAccountType()">
+                        <mat-option *ngFor="let valueType of valueTypes" [value]="valueType.id">{{valueType.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Account</mat-label>
+                    <mat-select formControlName="account" (selectionChange)="onSelectAccount()">
+                        <mat-option *ngFor="let account of accounts" [value]="account.code">{{account.code}}, {{account.description}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Cost Center</mat-label>
+                    <mat-select formControlName="costCenter" (selectionChange)="onSelectCostCenter()">
+                        <mat-option *ngFor="let costCenter of costCenters" [value]="costCenter.number">{{costCenter.number}}, {{costCenter.description}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!--<button color="primary" mat-flat-button (click)="onFilter()">Filter</button>-->
+            </div>
+        </form>
+    </div>
+    <div *ngIf="dataFiltered">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="costCenter">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell first-cell"> Cost Center </th>
+          <td mat-cell *matCellDef="let row" class="cell first-cell">{{row.costCenter.number}}, {{row.costCenter.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="account">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Account </th>
+          <td mat-cell *matCellDef="let row" class="cell">{{row.account.code}}, {{row.account.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="accountType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Account Type </th>
+          <td mat-cell *matCellDef="let row" class="cell">{{row.valueType.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="dept">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Department </th>
+          <td mat-cell *matCellDef="let row" class="cell">{{row.costCenter.department.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="deptElement">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Department Element </th>
+          <td mat-cell *matCellDef="let row" class="cell">
+            <mat-select (selectionChange)="onChangeMapping(row.mappingId, $event.value)" [(value)]="row.departmentElement.id">
+                <mat-option *ngFor="let departmentElement of departmentElements" [value]="departmentElement.id">{{departmentElement.name}}</mat-option>
+            </mat-select>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" [attr.colspan]="displayedColumns.length">No Data</td>
+        </tr>
+      </table>   
+    </div>
+    <mat-paginator [pageSize]="6" aria-label="Select page of contracts" hidePageSize></mat-paginator>
+  </mat-card>

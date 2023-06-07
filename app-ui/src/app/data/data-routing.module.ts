@@ -8,6 +8,7 @@ import { FileMappingsComponent } from './components/file-mappings/file-mappings.
 import { CostCentersComponent } from './components/cost-centers/cost-centers.component';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { CostCentersMappingComponent } from './components/cost-centers-mapping/cost-centers-mapping.component';
+import { GlPrMappingComponent } from './components/gl-pr-mapping/gl-pr-mapping.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: DataMenuItem.CostCenters, component: CostCentersComponent },
       { path: DataMenuItem.Accounts, component: AccountsComponent },
       { path: DataMenuItem.CostCentersMapping, component: CostCentersMappingComponent },
+      { path: DataMenuItem.GlPrMapping, component: GlPrMappingComponent },
     ]
   }
 ];
