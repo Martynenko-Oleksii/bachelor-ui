@@ -111,8 +111,14 @@ export class ApiService {
 
 
 
-  public getValueTypes(): Observable<ValueType[]> {
-    return this.http.get<ValueType[]>(`${this.baseApi}glPrMapping/accountTypes`, this.httpOptions);
+  public getValueTypes(mapped: boolean, facilityId: number): Observable<ValueType[]> {
+    return this.http.get<ValueType[]>(`${this.baseApi}glPrMapping/accountTypes`, {
+      params: {
+        mapped: mapped,
+        facilityId: facilityId
+      },
+      headers: (this.httpOptions as any).headers
+    });
   }
 
   public getFilterAccounts(mapped: boolean, valueTypeid: number, facilityId: number): Observable<Account[]> {

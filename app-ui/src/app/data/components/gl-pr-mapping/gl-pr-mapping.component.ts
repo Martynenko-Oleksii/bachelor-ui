@@ -18,9 +18,9 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
 
   public filtersForm = this.fb.group({
     mapped: [null, [Validators.required]],
-    valueType: [{value: null, disabled: true}, [Validators.required]],
-    account: [{value: null, disabled: true}, [Validators.required]],
-    costCenter: [{value: null, disabled: true}, [Validators.required]]
+    valueType: [{value: undefined, disabled: true}, [Validators.required]],
+    account: [{value: undefined, disabled: true}, [Validators.required]],
+    costCenter: [{value: undefined, disabled: true}, [Validators.required]]
   });
 
   public displayedColumns: string[] = ['costCenter', 'account', 'accountType', 'dept', 'deptElement'];
@@ -49,16 +49,9 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
 
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator!;
-
-    this.getValueTypes();
   }
 
   public onSelectMapped(): void {
-    if (this.dataFiltered) {
-      this.dataSource.data = [];
-      this.dataFiltered = false;
-    }
-
     this.filtersForm.get('valueType')?.setValue(null);
     this.filtersForm.get('valueType')?.enable();
 
@@ -66,6 +59,13 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
     this.filtersForm.get('account')?.disable();
     this.filtersForm.get('costCenter')?.setValue(null);
     this.filtersForm.get('costCenter')?.disable();
+
+    if (this.dataFiltered) {
+      this.dataSource.data = [];
+      this.dataFiltered = false;
+    }
+
+    this.getValueTypes();
   }
 
   public onSelectAccountType(): void {
@@ -98,7 +98,8 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
   }
 
   private getValueTypes(): void {
-    this.api.getValueTypes()
+    let mapped = this.filtersForm.get('mapped')!.value!
+    this.api.getValueTypes(mapped, this.facilityId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => {
         if (res) {
@@ -143,7 +144,7 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
 
     this.getDepartmentElements(this.costCenters.find(x => x.number === ccNumber)!.department!.standardDepartmentId!);
 
-    console.log(this.costCenters.find(x => x.number === ccNumber)!.department!.standardDepartmentId!);
+    //console.log(this.costCenters.find(x => x.number === ccNumber)!.department!.standardDepartmentId!);
 
     this.api.getMappingRows(mapped, valueTypeId, accountCode, ccNumber)
       .pipe(takeUntil(this.destroy$))

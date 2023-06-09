@@ -7,6 +7,7 @@ import { FileMapping, FileType } from '../../models/upload-data';
 import { takeUntil } from 'rxjs';
 import { ColumnDelimeter, FileTypeEnum } from '../../enums/upload-data';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-upload-data',
@@ -31,7 +32,11 @@ export class UploadDataComponent extends BaseSubscriber implements OnInit {
   public selectedFileType: FileType | undefined;
   public fileName: string | undefined;
 
-  constructor(private shared: SharedDataService, private api: ApiService, private fb: FormBuilder, private router: Router) {
+  constructor(private shared: SharedDataService,
+    private api: ApiService,
+    private fb: FormBuilder,
+    private router: Router,
+    private snackBar: MatSnackBar) {
     super();
   }
 
@@ -75,19 +80,16 @@ export class UploadDataComponent extends BaseSubscriber implements OnInit {
     this.formData.append('timePeriodId', this.currentTimePeriodId.toString());
     this.formData.append('dataSet', this.form.get('dataSetName')!.value!);
 
-    this.formData.forEach((value, key) => {
-      console.log(key);
-      console.log(value);
-    });
-
-    // this.api.uploadData(this.formData)
-    //   .subscribe(res => {
-    //     if (res) {
-    //       if (res.length === 0) {
-    //         this.router.navigate(['/data/upload-data']);
-    //       }
-    //     }
-    //   });
+    this.api.uploadData(this.formData)
+      .subscribe(res => {
+        if (res) {
+          if (res.length === 0) {
+            this.router.navigate(['/data/upload-data']);
+            this.snackBar.open('File has been uploaded', 'Ok');
+            this.form.reset();
+          }
+        }
+      });
   }
 
   private getFileTypes(): void {
