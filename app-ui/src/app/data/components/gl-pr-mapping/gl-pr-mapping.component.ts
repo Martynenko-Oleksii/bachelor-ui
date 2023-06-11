@@ -17,10 +17,10 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
   private facilityId: number = 0;
 
   public filtersForm = this.fb.group({
-    mapped: [null, [Validators.required]],
-    valueType: [{value: undefined, disabled: true}, [Validators.required]],
-    account: [{value: undefined, disabled: true}, [Validators.required]],
-    costCenter: [{value: undefined, disabled: true}, [Validators.required]]
+    mapped: [null],
+    valueType: [{value: undefined, disabled: true}],
+    account: [{value: undefined, disabled: true}],
+    costCenter: [{value: undefined, disabled: true}]
   });
 
   public displayedColumns: string[] = ['costCenter', 'account', 'accountType', 'dept', 'deptElement'];
@@ -31,6 +31,8 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
   public valueTypes: ValueType[] = [];
   public accounts: Account[] = [];
   public costCenters: CostCenter[] = [];
+  public departmentElementsPerStdDept: { [key: number]: DepartmentElement[] } = {};
+
   public departmentElements: DepartmentElement[] = [];
 
   public dataFiltered: boolean = false;
@@ -142,7 +144,7 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
     let accountCode = this.filtersForm.get('account')!.value!
     let ccNumber = this.filtersForm.get('costCenter')!.value!
 
-    this.getDepartmentElements(this.costCenters.find(x => x.number === ccNumber)!.department!.standardDepartmentId!);
+    //this.getDepartmentElements(this.costCenters.find(x => x.number === ccNumber)!.department!.standardDepartmentId!);
 
     //console.log(this.costCenters.find(x => x.number === ccNumber)!.department!.standardDepartmentId!);
 
@@ -150,6 +152,14 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => {
         if (res) {
+          let selectedStdDepts: number[] = [];
+          res.forEach(x => {
+            if (!selectedStdDepts.includes(x.costCenter.department!.standardDepartmentId)) {
+              this.getDepartmentElements(x.costCenter.department!.standardDepartmentId);
+              selectedStdDepts.push(x.costCenter.department!.standardDepartmentId);
+            }
+          });
+
           this.dataSource.data = res;
           this.dataFiltered = true;
         }
@@ -162,7 +172,8 @@ export class GlPrMappingComponent extends BaseSubscriber implements OnInit {
       .pipe(takeUntil(this.departmentElements))
       .subscribe(res => {
         if (res) {
-          this.departmentElements = res;
+          this.departmentElementsPerStdDept[stdDeptId] = res;
+          //this.departmentElements = res;
         }
       });
   }

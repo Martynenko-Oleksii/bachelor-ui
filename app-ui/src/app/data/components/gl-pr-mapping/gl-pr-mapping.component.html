@@ -15,21 +15,21 @@
                 <mat-form-field appearance="fill" class="form-field">
                     <mat-label>Account Type</mat-label>
                     <mat-select formControlName="valueType" (selectionChange)="onSelectAccountType()">
-                      <!--<mat-option [value]="null">ALL</mat-option>-->
+                      <mat-option [value]="0">ALL</mat-option>
                       <mat-option *ngFor="let valueType of valueTypes" [value]="valueType.id">{{valueType.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="form-field">
                     <mat-label>Account</mat-label>
                     <mat-select formControlName="account" (selectionChange)="onSelectAccount()">
-                      <!--<mat-option [value]="null">ALL</mat-option>-->
+                      <mat-option [value]="''">ALL</mat-option>
                       <mat-option *ngFor="let account of accounts" [value]="account.code">{{account.code}}, {{account.description}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="form-field">
                     <mat-label>Cost Center</mat-label>
                     <mat-select formControlName="costCenter" (selectionChange)="onSelectCostCenter()">
-                      <!--<mat-option [value]="null">ALL</mat-option>-->
+                      <mat-option [value]="''">ALL</mat-option>
                       <mat-option *ngFor="let costCenter of costCenters" [value]="costCenter.number">{{costCenter.number}}, {{costCenter.description}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -59,7 +59,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Department Element </th>
           <td mat-cell *matCellDef="let row" class="cell">
             <mat-select (selectionChange)="onChangeMapping(row.mappingId, $event.value)" [value]="row.departmentElement?.id">
-                <mat-option *ngFor="let departmentElement of departmentElements" [value]="departmentElement.id">{{departmentElement.name}}</mat-option>
+                <mat-option *ngFor="let departmentElement of departmentElementsPerStdDept[row.costCenter.department.standardDepartmentId]" [value]="departmentElement.id">{{departmentElement.name}}</mat-option>
             </mat-select>
           </td>
         </ng-container>
