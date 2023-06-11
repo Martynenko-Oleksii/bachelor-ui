@@ -9,6 +9,7 @@ import { ReportingRoles } from 'src/app/shared/enums/user-roles';
 import { DeleteDialogComponent, EntityType } from '../delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ReportingMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
+import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-reports',
@@ -35,6 +36,15 @@ export class ReportsComponent extends BaseSubscriber implements OnInit {
       .subscribe((user: AuthUser | null) => this.hasSharingRole = !!user && user.roles.includes(ReportingRoles.ItemSharing));
 
     this.getReports();
+  }
+
+  public onExportrtReport(report: Report): void {
+    this.api.exportReport(report.reportId)
+      .subscribe((event: HttpEvent<Blob>) => {
+        if (event.type === HttpEventType.Response) {
+          this.dowloadFile(event, report.name);
+        }
+      });
   }
 
   public onDelete(id: number, name: string, typeId: number): void {
@@ -72,5 +82,19 @@ export class ReportsComponent extends BaseSubscriber implements OnInit {
           });
         }
       })
+  }
+  
+  private dowloadFile(fileData: HttpResponse<Blob>, fileName: string): void {
+    const downloadFile = new Blob([fileData.body!], { type: fileData.body!.type });
+
+    const anchor = document.createElement('a');
+    anchor.style.display = 'none';
+    anchor.download = `${fileName}.pdf`;
+    anchor.href = URL.createObjectURL(downloadFile);
+    anchor.target = '_blank';
+    document.body.appendChild(anchor);
+    
+    anchor.click();
+    document.body.removeChild(anchor);
   }
 }

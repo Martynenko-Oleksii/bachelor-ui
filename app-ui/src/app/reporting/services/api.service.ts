@@ -104,4 +104,24 @@ export class ApiService {
   public getMeasuresByDepartmentId(id: number): Observable<Measure[]> {
     return this.http.get<Measure[]>(`${this.baseApi}Component/MeasuresByDeptId/${id}`, this.httpOptions);
   }
+
+  public runReport(reportType: number, id: number, name: string): Observable<Object> {
+    return this.http.post(`${this.baseApi}Management/RunReport`, {
+        ReportType: reportType,
+        TemplateId: id,
+        Name: name
+      },
+      this.httpOptions);
+  }
+
+  public exportReport(id: number) {
+    return this.http.post(`${this.baseApi}Management/ExportReport/${id}`,
+    null, 
+    {
+      headers: (this.httpOptions as any).headers,
+      observe: 'events',
+      reportProgress: true,
+      responseType: 'blob'
+    });
+  }
 }

@@ -9,6 +9,7 @@ import { ReportingRoles } from 'src/app/shared/enums/user-roles';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent, EntityType } from '../delete-dialog/delete-dialog.component';
 import { ReportingMenuItem, SharedDataService } from 'src/app/shared/services/shared-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-templates',
@@ -23,7 +24,7 @@ export class TemplatesComponent extends BaseSubscriber implements OnInit {
   public hasSharingRole: boolean = false;
   public templates: { [key: number]: Template[] } = [];
 
-  constructor(private api: ApiService, private auth: AuthService, private dialog: MatDialog, private shared: SharedDataService) {
+  constructor(private api: ApiService, private auth: AuthService, private dialog: MatDialog, private shared: SharedDataService, private router: Router) {
     super();
   }
 
@@ -36,6 +37,13 @@ export class TemplatesComponent extends BaseSubscriber implements OnInit {
     this.getTemplates();
   }
 
+  public onRunReport(template: Template): void {
+    this.api.runReport(template.reportTypeId, template.templateId, template.name)
+      .subscribe(_ => {
+        this.router.navigate(['/reporting/reports']);
+      });
+  }
+  
   public onDelete(id: number, name: string, typeId: number): void {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: {

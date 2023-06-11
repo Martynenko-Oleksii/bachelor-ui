@@ -26,13 +26,13 @@
                         <!--<div class="action" *ngIf="hasSharingRole">
                             <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Share">share</span>
                         </div>-->
-                        <div class="action">
+                        <div class="action" (click)="onRunReport(template)" *ngIf="template.statusId === 3">
                             <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Run Report">play_arrow</span>
                         </div>
                         <!--<div class="action">
                             <span class="material-icons" style="color: #29A2E6;font-size: 24px;" matTooltip="Edit">edit</span>
                         </div>-->
-                        <div class="action" (click)="onDelete(template.templateId, template.name, reportType)">
+                        <div class="action" (click)="onDelete(template.templateId, template.name, reportType)" *ngIf="template.statusId >= 3">
                             <span class="material-icons" style="color: #b00020;font-size: 24px;" matTooltip="Delete">delete</span>
                         </div>
                     </div>
