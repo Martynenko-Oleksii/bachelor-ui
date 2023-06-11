@@ -40,5 +40,9 @@
         "full_name": "Full Name",
         "last_login": "Last Log In",
         "no_date": "No Data"
+    },
+    "time_period_facility": {
+        "facility": "Facility",
+        "timePeriod": "Time Period"
     }
 }

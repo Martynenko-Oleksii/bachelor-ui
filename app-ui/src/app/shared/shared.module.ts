@@ -7,6 +7,7 @@ import { ErrorInterceptor } from '../interceptors/error.interceptor';
 import { TranslateDatePipe } from './pipes/translate-date.pipe';
 import localeUk from '@angular/common/locales/uk';
 import { DetailsPanelComponent } from './components/details-panel/details-panel.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 registerLocaleData(localeUk);
 
@@ -19,6 +20,7 @@ registerLocaleData(localeUk);
   imports: [
     CommonModule,
     AppMaterialModule,
+    TranslateModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

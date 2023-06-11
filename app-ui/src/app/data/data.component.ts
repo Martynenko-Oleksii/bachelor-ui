@@ -6,6 +6,7 @@ import { AuthService } from '../shared/services/auth.service';
 import { AuthUser } from '../shared/models/user';
 import { takeUntil } from 'rxjs';
 import { DetailsData } from '../shared/components/details-panel/details-panel.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-data',
@@ -20,7 +21,7 @@ export class DataComponent extends BaseSubscriber implements OnInit {
   public userRoles: string[] = [];
   public detailsData: DetailsData[] = [];
 
-  constructor(private data: SharedDataService, private auth: AuthService) {
+  constructor(private data: SharedDataService, private auth: AuthService, private translate: TranslateService) {
     super();
   }
   
@@ -35,7 +36,7 @@ export class DataComponent extends BaseSubscriber implements OnInit {
         if (user) {
           this.userRoles = user.roles;
           this.detailsData.push({
-            title: 'Customer',
+            title: this.translate.currentLang === 'uk-UA' ? 'Клієнт' : 'Customer',
             values: [`${user.customerId}. ${user.customer}`],
           });
         }

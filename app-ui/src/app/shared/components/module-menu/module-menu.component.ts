@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MenuDict, SharedDataService } from '../../services/shared-data.service';
 import { takeUntil } from 'rxjs';
 import { BaseSubscriber } from '../../models/base-subscriber';
+import { TranslateService } from '@ngx-translate/core';
 
 interface MenuMapping {
   name: string;
@@ -30,6 +31,29 @@ const securityMenuSections: { [key: string]: MenuMapping } = {
   'customer-support': {
     name: "Customer Support",
     items: ["Reset Passwords", "Logs"],
+    urls: ["reset-passwords", "logs"],
+  }
+}
+
+const securityMenuSectionsUA: { [key: string]: MenuMapping } = {
+  'access-control': {
+    name: "Управління доступом",
+    items: ["Користувачі", "Групи мед. закладів", "Групи відділів"],
+    urls: ["users", "facility-groups", "department-groups"],
+  },
+  'customer-management': {
+    name: "Управління клієнтами",
+    items: ["Клієнти", "Мед. заклади"],
+    urls: ["customers", "facilities"],
+  },
+  'contract-management': {
+    name: "Управління контрактами",
+    items: ["Контракти", "Контракти, що закінчуються"],
+    urls: ["contracts", "expiring-contracts"],
+  },
+  'customer-support': {
+    name: "Підтримка клієнтів",
+    items: ["Зброс паролів", "Логи"],
     urls: ["reset-passwords", "logs"],
   }
 }
@@ -66,6 +90,38 @@ const dataMenuSections: { [key: string]: MenuMapping } = {
   }
 }
 
+const dataMenuSectionsUA: { [key: string]: MenuMapping } = {
+  'data-configuration': {
+    name: "Конфігурація даних",
+    // items: ["Data Period", "Cost Centers", "Mapping Templates", "Data Sets", "Accounts", "Upload Data"],
+    // urls: ["data-period", "cost-centers", "mapping-templates", "data-sets", "accounts", "upload-data"],
+    items: ["Період звітування", "Центри витрат", "Шаблони мапінгу", "Рахунки", "Завантаження Даних"],
+    urls: ["data-period", "cost-centers", "mapping-templates", "accounts", "upload-data"],
+  },
+  'cc-mapping': {
+    name: "Мапінг центрів витрат",
+    items: ["Мапінг центрів витрат"],
+    urls: ["cost-centers-mapping"],
+  },
+  'gl-pr-mapping': {
+    name: "GL/PR мапінг",
+    items: ["Мапінг GL/PR сутностей"],
+    urls: ["gl-pr-mapping"],
+  },
+  // 'data-entry': {
+  //   name: "Data Entry",
+  //   items: ["Enter Data"],
+  //   urls: ["data-entering"],
+  // },
+  'data-administration': {
+    name: "Адміністрування",
+    // items: ["Unused Data", "Reporting Periods"],
+    // urls: ["unused-data", "reporting-periods"],
+    items: ["Періоди звітності"],
+    urls: ["reporting-periods"],
+  }
+}
+
 const reportingMenuSections: { [key: string]: MenuMapping } = {
   'management': {
     name: "Management",
@@ -93,6 +149,33 @@ const reportingMenuSections: { [key: string]: MenuMapping } = {
   }
 }
 
+const reportingMenuSectionsUA: { [key: string]: MenuMapping } = {
+  'management': {
+    name: "Управління",
+    items: ["Шаблони", "Звіти", "Порівняльні групи"],
+    urls: ["templates", "reports", "compare-groups"],
+  },
+  'administration': {
+    name: "Адміністрування",
+    //items: ["Queue Monitoring", "Reports Statistics", "Data Sharing Contact"],
+    //urls: ["queue-monitoring", "statistic", "data-sharing-report"],
+    items: ["Обмін контактними даними"],
+    urls: ["data-sharing-report"],
+  },
+  // 'department-reports': {
+  //   name: "Department",
+  //   items: ["Facility Trend", "Facility and CG Trend"],
+  //   urls: ["facility-trend", "facility-cg-trend"],
+  // },
+  'generic-reports': {
+    name: "Загальні звіти",
+    // items: ["Compare Group Trend", "Comparison Details"],
+    // urls: ["cg-trend", "comparison-details"],
+    items: ["Тенденції у порівняльній групі"],
+    urls: ["cg-trend"],
+  }
+}
+
 @Component({
   selector: 'app-module-menu',
   templateUrl: './module-menu.component.html',
@@ -108,7 +191,7 @@ export class ModuleMenuComponent extends BaseSubscriber implements OnInit {
   @Input() selectedModule: GlobalRoles | undefined;
   @Input() userRoles: string[] = [];
 
-  constructor(private router: Router, private shared: SharedDataService) {
+  constructor(private router: Router, private shared: SharedDataService, private translate: TranslateService) {
     super();
   }
 
@@ -137,15 +220,18 @@ export class ModuleMenuComponent extends BaseSubscriber implements OnInit {
     switch (this.selectedModule) {
       case GlobalRoles.Security:
         this.startPath = 'security';
-        this.mapping = securityMenuSections;
+        if (this.translate.currentLang === 'uk-UA') this.mapping = securityMenuSectionsUA;
+        else this.mapping = securityMenuSections;
         break;
       case GlobalRoles.Data:
-        this.mapping = dataMenuSections;
+        if (this.translate.currentLang === 'uk-UA') this.mapping = dataMenuSectionsUA;
+        else this.mapping = dataMenuSections;
         this.startPath = 'data';
         break;
       case GlobalRoles.Reporting:
+        if (this.translate.currentLang === 'uk-UA') this.mapping = reportingMenuSectionsUA;
+        else this.mapping = reportingMenuSections;
         this.startPath = 'reporting';
-        this.mapping = reportingMenuSections;
         break;
     }
   }

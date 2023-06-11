@@ -40,5 +40,9 @@
         "full_name": "Повне ім'я",
         "last_login": "Останній вхід",
         "no_date": "Немає даних"
+    },
+    "time_period_facility": {
+        "facility": "Мед. заклад",
+        "timePeriod": "Звітний період"
     }
 }
