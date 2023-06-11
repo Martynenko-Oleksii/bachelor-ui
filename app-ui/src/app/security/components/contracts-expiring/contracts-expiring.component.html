@@ -1,33 +1,33 @@
 <mat-card style="height: 100%;padding: 16px;">
     <div class="header">
-        <span>Expiring Contracts</span>
+        <span>{{ 'security.expiring' | translate }}</span>
     </div>
     <mat-form-field>
-        <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search String" #input>
+        <mat-label>{{ 'security.search' | translate }}</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="{{ 'security.search' | translate }}" #input>
     </mat-form-field>
         
         <div>
           <table mat-table [dataSource]="dataSource" matSort>
         
             <ng-container matColumnDef="contract">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell first-cell"> Contract </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell first-cell"> {{ 'security.contract' | translate }} </th>
               <td mat-cell *matCellDef="let row" class="cell first-cell"> {{row.contract.name}} </td>
             </ng-container>
         
             <ng-container matColumnDef="customer">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Customer </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> {{ 'security.customer' | translate }} </th>
               <td mat-cell *matCellDef="let row" class="cell"> {{row.name}}</td>
             </ng-container>
         
             <ng-container matColumnDef="expiring">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Expiring Date </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> {{ 'security.expiring_date' | translate }} </th>
               <td mat-cell *matCellDef="let row" class="cell"> {{row.expiringDate | translateDate:'medium'}}</td>
             </ng-container>
         
             <ng-container matColumnDef="renewal">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Will be renewed </th>
-              <td mat-cell *matCellDef="let row" class="cell"> {{row.autoRenewal ? 'Yes' : 'No'}}</td>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> {{ 'security.renew' | translate }} </th>
+              <td mat-cell *matCellDef="let row" class="cell"> {{row.autoRenewal ? ('security.yes' | translate) : ('security.no' | translate) }}</td>
             </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
