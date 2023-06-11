@@ -37,8 +37,10 @@ const securityMenuSections: { [key: string]: MenuMapping } = {
 const dataMenuSections: { [key: string]: MenuMapping } = {
   'data-configuration': {
     name: "Data Configuration",
-    items: ["Data Period", "Cost Centers", "Mapping Templates", "Data Sets", "Accounts", "Upload Data"],
-    urls: ["data-period", "cost-centers", "mapping-templates", "data-sets", "accounts", "upload-data"],
+    // items: ["Data Period", "Cost Centers", "Mapping Templates", "Data Sets", "Accounts", "Upload Data"],
+    // urls: ["data-period", "cost-centers", "mapping-templates", "data-sets", "accounts", "upload-data"],
+    items: ["Data Period", "Cost Centers", "Mapping Templates", "Accounts", "Upload Data"],
+    urls: ["data-period", "cost-centers", "mapping-templates", "accounts", "upload-data"],
   },
   'cc-mapping': {
     name: "Cost Center Mapping",
@@ -57,8 +59,10 @@ const dataMenuSections: { [key: string]: MenuMapping } = {
   // },
   'data-administration': {
     name: "Administration",
-    items: ["Unused Data", "Reporting Periods"],
-    urls: ["unused-data", "reporting-periods"],
+    // items: ["Unused Data", "Reporting Periods"],
+    // urls: ["unused-data", "reporting-periods"],
+    items: ["Reporting Periods"],
+    urls: ["reporting-periods"],
   }
 }
 
